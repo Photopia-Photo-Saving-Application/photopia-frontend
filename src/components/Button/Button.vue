@@ -1,5 +1,5 @@
 <template>
-    <v-btn raised class="mt-5" :color=color :style="{width: width}">
+    <v-btn raised class="mt-5" :color=color :style="{width: width}" @click="click">
         {{text}}
     </v-btn>
 </template>
@@ -16,7 +16,14 @@ export default {
         },
         'width':{
             required:true
-        }
+        },
+        'click':{
+            type:Function,
+            required:false,
+            default:()=>{
+                console.log("button component: default click");
+            }
+        },
     }
 }
 </script>

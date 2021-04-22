@@ -11,7 +11,7 @@
             ></v-text-field>
         </template>
         <template #buttonField>
-            <Button width="100%" text="Send email" color="primary" @click="submit"></Button>
+            <Button width="100%" text="Recover Account" color="primary" :click="submit"></Button>
         </template>
         <template #redirectionField>
             <UserRouterLink to1="/signin" to2="/signup" text1="Sign In" text2="Create a new account"/>
@@ -79,7 +79,9 @@ export default {
 
     methods: {
         submit() {
-            this.$v.$touch()
+            this.$v.$touch();
+            console.log("inside submit");
+            this.$router.push("/forgotpasswordresponse");
         },
         clear() {
             this.$v.$reset()
