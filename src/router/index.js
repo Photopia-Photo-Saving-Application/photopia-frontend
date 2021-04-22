@@ -5,6 +5,8 @@ import SignIn from "@/views/SignIn";
 import SignUp from "@/views/SignUp";
 import ForgotPassword from "@/views/ForgotPassword";
 import ForgotPasswordResponse from "@/views/ForgotPasswordResponse";
+import SignUpResponse from "@/views/SignUpResponse";
+import SignUpVerification from "@/views/SignUpVerification";
 
 Vue.use(VueRouter)
 
@@ -23,6 +25,16 @@ const routes = [
     path: '/signup',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/signupresponse',
+    name: 'SignUpResponse',
+    component: SignUpResponse
+  },
+  {
+    path: '/signupverification',
+    name: 'SignUpVerification',
+    component: SignUpVerification
   },
   {
     path: '/forgotpassword',
