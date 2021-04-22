@@ -1,5 +1,5 @@
-<template>
-  <v-app >
+<template >
+  <v-app style="font-family: 'New Tegomin', serif;">
 <!--    <v-app-bar-->
 <!--      app>-->
 <!--    </v-app-bar>-->

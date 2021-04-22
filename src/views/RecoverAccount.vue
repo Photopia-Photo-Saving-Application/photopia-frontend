@@ -1,9 +1,11 @@
 <template>
 <UserForm>
     <template #messageField>
-        <p style="font-family: 'New Tegomin', serif;">
-        Reset your password to recover your account.
-        </p>
+        <MyText>
+            <template #default>
+                Reset your password.
+            </template>
+        </MyText>
     </template>
     <template #inputField>
         <v-text-field
@@ -35,9 +37,10 @@ import Button from "@/components/Button/Button";
 import UserRouterLink from "@/components/UserRouterLink/UserRouterLink";
 import {validationMixin} from "vuelidate";
 import {email, maxLength, required} from "vuelidate/lib/validators";
+import MyText from "@/components/MyText/MyText";
 export default {
     name: "RecoverAccount",
-    components: {Button, UserForm, UserRouterLink},
+    components: {MyText, Button, UserForm, UserRouterLink},
     mixins: [validationMixin],
 
     validations: {

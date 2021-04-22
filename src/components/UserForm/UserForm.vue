@@ -6,15 +6,15 @@
 
                 <v-card elevation="5" class="pa-16">
                     <v-card-title class=" justify-center" style="font-family: 'Dancing Script', cursive; font-size: 2em"> PHOTOPIA</v-card-title>
-                    <v-card-text class="text-h6" >
+                    <v-card-text class="text-h6 pt-4" >
                         <slot name="messageField"></slot>
                     </v-card-text>
-                    <v-card-actions >
                         <v-form style="width: 100%;">
                             <slot name="inputField"/>
+                            <v-card-actions>
                             <slot name="buttonField" />
+                            </v-card-actions>
                         </v-form>
-                    </v-card-actions>
                     <v-card-text>
                         <slot name="redirectionField"/>
                     </v-card-text>

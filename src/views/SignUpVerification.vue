@@ -1,19 +1,22 @@
 <template>
 <UserForm>
     <template #messageField>
-        <p style="font-family: 'New Tegomin', serif;">
-        Verification Complete !! <br>
+        <MyText>
+            <template #default>
+            Verification Complete !! <br>
             Please <router-link to="/signIn" style="text-decoration: none">Sign In</router-link>!!
-        </p>
+            </template>
+        </MyText>
     </template>
 </UserForm>
 </template>
 
 <script>
 import UserForm from "@/components/UserForm/UserForm";
+import MyText from "@/components/MyText/MyText";
 export default {
 name: "SignUpVerification",
-    components: {UserForm}
+    components: {MyText, UserForm}
 }
 </script>
 

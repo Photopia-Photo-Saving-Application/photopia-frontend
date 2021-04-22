@@ -1,16 +1,21 @@
 <template>
     <UserForm>
     <template #messageField>
-        <p style="font-family: 'New Tegomin', serif;">Thank you for signing up. A verification email has been sent to your email address.</p>
+        <MyText>
+            <template #default>
+               Thank you for signing up. A verification email has been sent to your email address.
+            </template>
+        </MyText>
     </template>
     </UserForm>
 </template>
 
 <script>
 import UserForm from "@/components/UserForm/UserForm";
+import MyText from "@/components/MyText/MyText";
 export default {
 name: "SignUpResponse",
-    components: {UserForm}
+    components: {MyText, UserForm}
 }
 </script>
 
