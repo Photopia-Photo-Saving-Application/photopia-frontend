@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link :to=to1 style="text-decoration: none">{{ text1 }}</router-link>
+        <router-link :to=to1 style="text-decoration: none" >{{ text1 }}</router-link>
         <v-spacer/>
         <router-link :to=to2 style="text-decoration: none">{{ text2 }}</router-link>
     </div>

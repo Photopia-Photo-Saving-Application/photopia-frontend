@@ -4,16 +4,15 @@
             <v-text-field
                 v-model="name"
                 :error-messages="nameErrors"
-                :counter="10"
-                label="Name"
+                label="Username"
                 required
                 @input="$v.name.$touch()"
                 @blur="$v.name.$touch()"
             ></v-text-field>
             <v-text-field
-                v-model="email"
+                v-model="password"
                 :error-messages="emailErrors"
-                label="E-mail"
+                label="Password"
                 required
                 @input="$v.email.$touch()"
                 @blur="$v.email.$touch()"
@@ -54,14 +53,7 @@ export default {
     data: () => ({
         name: '',
         email: '',
-        select: null,
-        items: [
-            'Item 1',
-            'Item 2',
-            'Item 3',
-            'Item 4',
-        ],
-        checkbox: false,
+        password:'',
     }),
 
     computed: {
