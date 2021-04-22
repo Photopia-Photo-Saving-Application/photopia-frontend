@@ -1,8 +1,9 @@
 <template>
     <div>
-        <router-link :to=to1 style="text-decoration: none" >{{ text1 }}</router-link>
+        <b><router-link :to=to1 style="text-decoration: none ; color: #01579B" >{{ text1 }}</router-link>
         <v-spacer/>
-        <router-link :to=to2 style="text-decoration: none">{{ text2 }}</router-link>
+        <router-link :to=to2 style="text-decoration: none ;color: #01579B" >{{ text2 }}</router-link>
+        </b>
     </div>
 </template>
 
