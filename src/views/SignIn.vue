@@ -23,7 +23,7 @@
             <Button width="100%" text="Sign In" color="primary" @click="submit"></Button>
         </template>
         <template #redirectionField>
-                <router-link ></router-link>
+            <UserRouterLink to1="/signup" to2="/forgotpassword" text1="Create a new account" text2="Forgot password"/>
         </template>
     </UserForm>
 </template>
@@ -33,10 +33,11 @@ import {validationMixin} from 'vuelidate'
 import {required, maxLength, email} from 'vuelidate/lib/validators'
 import UserForm from "@/components/UserForm/UserForm";
 import Button from "@/components/Button/Button";
+import UserRouterLink from "@/components/UserRouterLink/UserRouterLink";
 
 export default {
     name: "SignIn",
-    components: {Button, UserForm},
+    components: {Button, UserForm,UserRouterLink},
     mixins: [validationMixin],
 
     validations: {

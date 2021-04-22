@@ -5,7 +5,7 @@
 <!--    </v-app-bar>-->
 
     <v-main>
-      <SignIn/>
+      <router-view/>
     </v-main>
   </v-app>
 </template>
