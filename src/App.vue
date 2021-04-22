@@ -1,5 +1,5 @@
 <template>
-  <v-app style="background-image:url('src/assets/image/background.jpg') ">
+  <v-app >
 <!--    <v-app-bar-->
 <!--      app>-->
 <!--    </v-app-bar>-->
