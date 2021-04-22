@@ -3,7 +3,7 @@
     <template #messageField>
         <p style="font-family: 'New Tegomin', serif;">
         Verification Complete !! <br>
-            Please <router-link to="/signIn" style="text-decoration: none">Sign In</router-link>
+            Please <router-link to="/signIn" style="text-decoration: none">Sign In</router-link>!!
         </p>
     </template>
 </UserForm>

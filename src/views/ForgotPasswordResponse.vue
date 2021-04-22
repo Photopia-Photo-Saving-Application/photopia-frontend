@@ -1,7 +1,7 @@
 <template>
 <UserForm>
     <template #messageField >
-        <p style="font-family: 'New Tegomin', serif;">A password recovery email has been sent to your email address</p>
+        <p style="font-family: 'New Tegomin', serif;">A password recovery email has been sent to your email address.</p>
     </template>
 </UserForm>
 </template>
