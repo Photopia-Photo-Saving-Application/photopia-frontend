@@ -16,7 +16,8 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+
   },
   {
     path: '/signIn',
@@ -74,4 +75,28 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if(to.meta.requiresAuth && store.getters['student/getFlagSignIn']===false && localStorage.getItem('token')===null){
+    console.log("router guard: first block");
+    console.log("requiresAuth: ",to.meta.requiresAuth);
+    console.log("flagSignIn: ",store.getters['student/getFlagSignIn']);
+    console.log("localStorageToken: ",localStorage.getItem('token'));
+    next('/signIn');
+  }
+  else if(to.meta.requiresUnauth && (store.getters['student/getFlagSignIn']===true || localStorage.getItem('token')!==null)){
+    console.log("router guard: second block");
+    console.log("requiresUnauth: ",to.meta.requiresUnauth);
+    console.log("flagSignIn: ",store.getters['student/getFlagSignIn']);
+    console.log("localStorageToken: ",localStorage.getItem('token'));
+    next('/home');
+  }
+  else{
+    console.log("router guard: third block")
+    console.log("requiresAuth: ",to.meta.requiresAuth);
+    console.log("flagSignIn: ",store.getters['student/getFlagSignIn']);
+    console.log("localStorageToken: ",localStorage.getItem('token'));
+    next();
+  }
+
+});
 export default router

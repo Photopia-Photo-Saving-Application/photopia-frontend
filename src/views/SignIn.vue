@@ -60,7 +60,7 @@ export default {
       console.log("SignIn mounted: getLoading = "+this.getLoading);
     },
     computed: {
-        ...mapGetters(['getLoading','getToken']),
+        ...mapGetters(['getLoading']),
         nameErrors() {
             const errors = []
             if (!this.$v.name.$dirty) return errors
