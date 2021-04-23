@@ -107,7 +107,7 @@ export default {
     methods: {
         submit() {
             this.$v.$touch();
-            this.$router.push("/signupresponse");
+            this.$router.push("/");
         },
         clear() {
             this.$v.$reset()

@@ -56,7 +56,7 @@ name: "Navbar",
         drawer: false,
         group: null,
         items:[
-            {message:'Home', to:'/home'},
+            {message:'Home', to:'/'},
             {message: 'Settings', to:'/settings'},
             {message: 'Logout', to:'/signin'}
         ]

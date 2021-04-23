@@ -19,7 +19,7 @@
             ></v-text-field>
         </template>
         <template #buttonField>
-            <Button width="100%" text="Sign In" color="primary" @click="submit"></Button>
+            <Button width="100%" text="Sign In" color="primary" :click="submit"></Button>
         </template>
         <template #redirectionField>
             <UserRouterLink to1="/signup" to2="/forgotpassword" text1="Create a new account" text2="Forgot password"/>
@@ -87,7 +87,8 @@ export default {
 
     methods: {
         submit() {
-            this.$v.$touch()
+            this.$v.$touch();
+            this.$router.push('/');
         },
         clear() {
             this.$v.$reset()

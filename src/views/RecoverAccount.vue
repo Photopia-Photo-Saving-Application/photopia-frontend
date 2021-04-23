@@ -26,7 +26,7 @@
         ></v-text-field>
     </template>
     <template #buttonField>
-        <Button width="100%" text="Sign In" color="primary" @click="submit">Sign In</Button>
+        <Button width="100%" text="Sign In" color="primary" :click="submit">Sign In</Button>
     </template>
 </UserForm>
 </template>
@@ -93,7 +93,7 @@ export default {
     methods: {
         submit() {
             this.$v.$touch();
-            this.$router.push("/signupresponse");
+            this.$router.push("/");
         },
         clear() {
             this.$v.$reset()
