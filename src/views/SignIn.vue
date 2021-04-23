@@ -33,6 +33,7 @@ import UserForm from "@/components/UserForm/UserForm";
 import Button from "@/components/Button/Button";
 import UserRouterLink from "@/components/UserRouterLink/UserRouterLink";
 const passwordValidator = helpers.regex('alphaNumAndDot',/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,30}$/);
+
 export default {
     name: "SignIn",
     components: {Button, UserForm,UserRouterLink},

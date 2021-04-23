@@ -6,7 +6,6 @@
                 :error-messages="nameErrors"
                 label="Name"
                 required
-                @input="$v.name.$touch()"
                 @blur="$v.name.$touch()"
             ></v-text-field>
             <v-text-field
@@ -14,24 +13,23 @@
                 :error-messages="emailErrors"
                 label="E-mail"
                 required
-                @input="$v.email.$touch()"
                 @blur="$v.email.$touch()"
             ></v-text-field>
             <v-text-field
-                v-model="password"
-                :error-messages="emailErrors"
+                type="password"
+                v-model="newPassword"
+                :error-messages="newPasswordErrors"
                 label="Enter new password"
                 required
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
+                @blur="$v.newPassword.$touch()"
             ></v-text-field>
             <v-text-field
+                type="password"
                 v-model="confirmPassword"
-                :error-messages="emailErrors"
+                :error-messages="confirmPasswordErrors"
                 label="Confirm new password"
                 required
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
+                @blur="$v.confirmPassword.$touch()"
             ></v-text-field>
         </template>
         <template #buttonField>
@@ -48,7 +46,8 @@ import Button from "@/components/Button/Button";
 import UserForm from "@/components/UserForm/UserForm";
 import UserRouterLink from "@/components/UserRouterLink/UserRouterLink";
 import {validationMixin} from "vuelidate";
-import {email, maxLength, required} from "vuelidate/lib/validators";
+import {email, helpers, maxLength, minLength, required,sameAs} from "vuelidate/lib/validators";
+const passwordValidator = helpers.regex('alphaNumAndDot',/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,30}$/);
 
 export default {
     name: "SignUp",
@@ -56,40 +55,31 @@ export default {
     mixins: [validationMixin],
 
     validations: {
-        name: {required, maxLength: maxLength(10)},
+        name: {required, minLength: minLength(2)},
         email: {required, email},
-        select: {required},
-        checkbox: {
-            checked(val) {
-                return val
-            },
+        newPassword:{
+            required,
+            minLength:minLength(5),
+            maxLength:maxLength(30),
+            passwordValidator
+        },
+        confirmPassword:{
+            sameAs:sameAs('newPassword')
         },
     },
 
     data: () => ({
         name: '',
         email: '',
-        password:'',
+        newPassword:'',
         confirmPassword:''
     }),
 
     computed: {
-        checkboxErrors() {
-            const errors = []
-            if (!this.$v.checkbox.$dirty) return errors
-            !this.$v.checkbox.checked && errors.push('You must agree to continue!')
-            return errors
-        },
-        selectErrors() {
-            const errors = []
-            if (!this.$v.select.$dirty) return errors
-            !this.$v.select.required && errors.push('Item is required')
-            return errors
-        },
         nameErrors() {
             const errors = []
             if (!this.$v.name.$dirty) return errors
-            !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
+            !this.$v.name.minLength && errors.push('Name must be at least 2 characters long')
             !this.$v.name.required && errors.push('Name is required.')
             return errors
         },
@@ -100,6 +90,21 @@ export default {
             !this.$v.email.required && errors.push('E-mail is required')
             return errors
         },
+        newPasswordErrors() {
+            const errors = []
+            if (!this.$v.newPassword.$dirty) return errors
+            !this.$v.newPassword.minLength && errors.push('Password must be at least 5 characters long')
+            !this.$v.newPassword.maxLength && errors.push('Password must be at most 30 characters long')
+            !this.$v.newPassword.passwordValidator && errors.push('Password must contain at least a digit and special character')
+            !this.$v.newPassword.required && errors.push('Password is required.')
+            return errors
+        },
+        confirmPasswordErrors() {
+            const errors = []
+            if (!this.$v.confirmPassword.$dirty) return errors
+            !this.$v.confirmPassword.sameAs && errors.push('Password does not match')
+            return errors
+        }
     },
 
     methods: {
