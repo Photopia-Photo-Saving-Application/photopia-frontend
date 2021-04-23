@@ -1,21 +1,21 @@
 <template>
-    <UserForm>
-    <template #messageField>
+<UserForm>
+    <template #messageField >
         <MyText>
             <template #default>
-               Thank you for signing up. A verification email has been sent to your email address.
+                A password recovery email has been sent to your email address.
             </template>
         </MyText>
     </template>
-    </UserForm>
+</UserForm>
 </template>
 
 <script>
 import UserForm from "@/components/UserForm/UserForm";
 import MyText from "@/components/MyText/MyText";
 export default {
-name: "SignUpResponse",
-    components: {MyText, UserForm}
+name: "RecoverAccountNotify",
+    components:{MyText, UserForm}
 }
 </script>
 

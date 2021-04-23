@@ -24,17 +24,21 @@
                 dense
             >
                 <v-list-item-content>
-                    <v-list-item-title class=" justify-center secondary--text" style="font-family: 'Dancing Script', cursive; font-size: 1.5em" >
+                    <v-list-item-title class=" justify-center secondary--text ma-6" style="font-family: 'Dancing Script', cursive; font-size: 1.5em" >
                         PHOTOPIA
                     </v-list-item-title>
                 </v-list-item-content>
                 <v-list-item-group
                     v-model="group"
                     active-class="secondary--text accent"
-                    v-for="(item, index) in items" :key="index"
                 >
-                    <v-list-item>
-                        <UserRouterLink1 :to=item.to :text=item.message></UserRouterLink1>
+                    <v-list-item v-for="(item, index) in items" :key="index" link :to="item.to">
+                        <v-list-item-icon>
+                            <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-item-icon>
+                        <v-list-item-content>
+                            <v-list-item-title  >{{item.message}}</v-list-item-title>
+                        </v-list-item-content>
                     </v-list-item>
                 </v-list-item-group>
             </v-list>
@@ -56,9 +60,9 @@ name: "Navbar",
         drawer: false,
         group: null,
         items:[
-            {message:'Home', to:'/'},
-            {message: 'Settings', to:'/settings'},
-            {message: 'Logout', to:'/signin'}
+            {message:'Home', to:'/', icon:'mdi-home'},
+            {message: 'Settings', to:'/settings', icon:'mdi-cog'},
+            {message: 'Logout', to:'/signin', icon:'mdi-logout'}
         ]
     }),
 

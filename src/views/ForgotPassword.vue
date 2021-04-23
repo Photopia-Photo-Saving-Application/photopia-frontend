@@ -81,7 +81,7 @@ export default {
         submit() {
             this.$v.$touch();
             console.log("inside submit");
-            this.$router.push("/forgotpasswordresponse");
+            this.$router.push("/recoverAccount/notify");
         },
         clear() {
             this.$v.$reset()

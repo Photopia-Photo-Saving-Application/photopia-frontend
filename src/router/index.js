@@ -4,9 +4,9 @@ import Home from '@/views/Home'
 import SignIn from "@/views/SignIn";
 import SignUp from "@/views/SignUp";
 import ForgotPassword from "@/views/ForgotPassword";
-import ForgotPasswordResponse from "@/views/ForgotPasswordResponse";
-import SignUpResponse from "@/views/SignUpResponse";
-import SignUpVerification from "@/views/SignUpVerification";
+import RecoverAccountNotify from "@/views/RecoverAccountNotify";
+import SignUpNotify from "@/views/SignUpNotify";
+import SignUpVerify from "@/views/SignUpVerify";
 import RecoverAccount from "@/views/RecoverAccount";
 import Settings from "@/views/Settings";
 
@@ -19,37 +19,37 @@ const routes = [
     component: Home
   },
   {
-    path: '/signin',
+    path: '/signIn',
     name: 'SignIn',
     component: SignIn
   },
   {
-    path: '/signup',
+    path: '/signUp/notify',
+    name: 'SignUpNotify',
+    component: SignUpNotify
+  },
+  {
+    path: '/signUp/verify',
+    name: 'SignUpVerify',
+    component: SignUpVerify
+  },
+  {
+    path: '/signUp',
     name: 'SignUp',
     component: SignUp
   },
   {
-    path: '/signupresponse',
-    name: 'SignUpResponse',
-    component: SignUpResponse
-  },
-  {
-    path: '/signupverification',
-    name: 'SignUpVerification',
-    component: SignUpVerification
-  },
-  {
-    path: '/forgotpassword',
+    path: '/forgotPassword',
     name: 'ForgotPassword',
     component: ForgotPassword
   },
   {
-    path: '/forgotpasswordresponse',
-    name: 'ForgotPasswordResponse',
-    component: ForgotPasswordResponse
+    path: '/recoverAccount/notify',
+    name: 'RecoverAccountNotify',
+    component: RecoverAccountNotify
   },
   {
-    path: '/recoveraccount',
+    path: '/recoverAccount',
     name: 'RecoverAccount',
    component: RecoverAccount
   },

@@ -16,7 +16,7 @@ import UserForm from "@/components/UserForm/UserForm";
 import MyText from "@/components/MyText/MyText";
 import UserRouterLink1 from "@/components/UserRouterLink/UserRouterLink1";
 export default {
-name: "SignUpVerification",
+name: "SignUpVerify",
     components: {UserRouterLink1, MyText, UserForm}
 }
 </script>

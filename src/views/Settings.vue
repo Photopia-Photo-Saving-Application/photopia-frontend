@@ -9,7 +9,7 @@
                 <v-text-field
                     v-model="oldpassword"
                     :error-messages="emailErrors"
-                    label="Enter password"
+                    label="Enter current password"
                     required
                     @input="$v.email.$touch()"
                     @blur="$v.email.$touch()"
@@ -35,7 +35,7 @@
                 <Button color="primary" text="CONFIRM" width="100%" :click=submit></Button>
             </template>
             <template #redirectionField>
-                <UserRouterLink1 to="/signin" text="Logout from all devices"></UserRouterLink1>
+                <UserRouterLink to1="/signIn" to2="/signIn" text1="Logout from all devices" text2="Delete account"></UserRouterLink>
             </template>
         </UserForm>
     </div>

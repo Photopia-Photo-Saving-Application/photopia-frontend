@@ -10,7 +10,7 @@ export default new Vuetify({
             light: {
                 primary: colors.cyan.lighten2,
                 secondary: colors.lightBlue.darken4,
-                accent: colors.cyan.lighten3,
+                accent: colors.cyan.lighten4,
                 error: colors.red.accent3,
             },
         },
