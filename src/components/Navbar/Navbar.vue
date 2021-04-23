@@ -1,8 +1,8 @@
 <template>
    <div>
         <v-app-bar
-            color="secondary"
-            dark
+            color="primary"
+
             app
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>

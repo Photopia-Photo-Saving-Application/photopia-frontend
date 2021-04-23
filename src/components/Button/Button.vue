@@ -1,5 +1,5 @@
 <template>
-    <v-btn raised class="mt-5" :color=color :style="{width: width}" @click="click" :disabled="disabled">
+    <v-btn raised class="mt-5 black--text" :color=color :style="{width: width}" @click="click" :disabled="disabled" >
         {{text}}
     </v-btn>
 </template>

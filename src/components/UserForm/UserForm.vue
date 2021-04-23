@@ -3,7 +3,13 @@
         <v-row>
             <v-col cols="12" lg="4" sm="2"></v-col>
             <v-col cols="12" lg="4" sm="8">
-
+                <v-progress-linear
+                    color="primary"
+                    v-if="getLoading"
+                    indeterminate
+                    rounded
+                    height="6"
+                ></v-progress-linear>
                 <v-card elevation="5" class="pa-16">
                     <v-card-title class=" justify-center" style="font-family: 'Dancing Script', cursive; font-size: 1.6em" v-if="show"> PHOTOPIA</v-card-title>
                     <v-card-text class="text-h6 pt-4" >
@@ -30,6 +36,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
 name: "UserForm",
     props:{
@@ -37,6 +44,9 @@ name: "UserForm",
         type:Boolean,
         default: true
     }
+    },
+    computed:{
+    ...mapGetters(['getLoading']),
     }
 }
 </script>

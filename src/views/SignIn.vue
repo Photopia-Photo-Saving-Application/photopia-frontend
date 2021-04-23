@@ -18,7 +18,7 @@
             ></v-text-field>
         </template>
         <template #buttonField>
-            <Button width="100%" text="Sign In" color="primary" :click="submit" :disabled="$v.$anyError"></Button>
+            <Button width="100%" text="Sign In" color="primary" :click="submit" :disabled="$v.$anyError || getLoading"></Button>
         </template>
         <template #redirectionField>
             <UserRouterLink to1="/signup" to2="/forgotpassword" text1="Create a new account" text2="Forgot password"/>
@@ -32,7 +32,9 @@ import {required, minLength, maxLength, email, alphaNum, helpers} from 'vuelidat
 import UserForm from "@/components/UserForm/UserForm";
 import Button from "@/components/Button/Button";
 import UserRouterLink from "@/components/UserRouterLink/UserRouterLink";
+import {mapActions,mapGetters} from 'vuex'
 const passwordValidator = helpers.regex('alphaNumAndDot',/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,30}$/);
+
 
 export default {
     name: "SignIn",
@@ -54,8 +56,11 @@ export default {
         password:'',
 
     }),
-
+    mounted(){
+      console.log("SignIn mounted: getLoading = "+this.getLoading);
+    },
     computed: {
+        ...mapGetters(['getLoading','getToken']),
         nameErrors() {
             const errors = []
             if (!this.$v.name.$dirty) return errors
@@ -75,16 +80,15 @@ export default {
     },
 
     methods: {
-        submit() {
-            this.$v.$touch();
-            this.$router.push('/');
+        ...mapActions('auth',['signIn']),
+        async submit() {
+            await this.$v.$touch();
+            await this.signIn({username:this.name,password:this.password});
         },
         clear() {
             this.$v.$reset()
             this.name = ''
-            this.email = ''
-            this.select = null
-            this.checkbox = false
+            this.password = ''
         },
     },
 }
