@@ -17,56 +17,74 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/signIn',
     name: 'SignIn',
-    component: SignIn
+    component: SignIn,
+    meta:{
+      requiresAuth: false
+    }
   },
   {
     path: '/signUp/notify',
     name: 'SignUpNotify',
-    component: SignUpNotify
+    component: SignUpNotify,
+    meta:{
+      requiresAuth:false
+    }
   },
   {
     path: '/signUp/verify',
     name: 'SignUpVerify',
-    component: SignUpVerify
+    component: SignUpVerify,
+    meta:{
+      requiresAuth:false
+    }
   },
   {
     path: '/signUp',
     name: 'SignUp',
-    component: SignUp
+    component: SignUp,
+    meta:{
+      requiresAuth:false
+    }
   },
   {
     path: '/forgotPassword',
     name: 'ForgotPassword',
-    component: ForgotPassword
+    component: ForgotPassword,
+    meta:{
+      requiresAuth:false
+    }
   },
   {
     path: '/recoverAccount/notify',
     name: 'RecoverAccountNotify',
-    component: RecoverAccountNotify
+    component: RecoverAccountNotify,
+    meta:{
+      requiresAuth:false
+    }
   },
   {
     path: '/recoverAccount',
     name: 'RecoverAccount',
-   component: RecoverAccount
+    component: RecoverAccount,
+    meta:{
+      requiresAuth:false
+    }
   },
   {
     path:'/settings',
     name:'Settings',
-    component:Settings
+    component:Settings,
+    meta:{
+      requiresAuth:true
+    }
   }
-  // {
-  //   path: '/about',
-  //   name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
 ]
 
 const router = new VueRouter({
@@ -76,27 +94,12 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.meta.requiresAuth && store.getters['student/getFlagSignIn']===false && localStorage.getItem('token')===null){
-    console.log("router guard: first block");
-    console.log("requiresAuth: ",to.meta.requiresAuth);
-    console.log("flagSignIn: ",store.getters['student/getFlagSignIn']);
-    console.log("localStorageToken: ",localStorage.getItem('token'));
+  if(to.meta.requiresAuth && localStorage.getItem('token')===null){
+    console.log("router guard: you are not authenticated yet")
     next('/signIn');
   }
-  else if(to.meta.requiresUnauth && (store.getters['student/getFlagSignIn']===true || localStorage.getItem('token')!==null)){
-    console.log("router guard: second block");
-    console.log("requiresUnauth: ",to.meta.requiresUnauth);
-    console.log("flagSignIn: ",store.getters['student/getFlagSignIn']);
-    console.log("localStorageToken: ",localStorage.getItem('token'));
-    next('/home');
-  }
   else{
-    console.log("router guard: third block")
-    console.log("requiresAuth: ",to.meta.requiresAuth);
-    console.log("flagSignIn: ",store.getters['student/getFlagSignIn']);
-    console.log("localStorageToken: ",localStorage.getItem('token'));
     next();
   }
-
 });
 export default router
