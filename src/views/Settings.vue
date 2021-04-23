@@ -47,7 +47,7 @@ import UserRouterLink from "@/components/UserRouterLink/UserRouterLink";
 import UserForm from "@/components/UserForm/UserForm";
 import MyText from "@/components/MyText/MyText";
 import {validationMixin} from "vuelidate";
-import {email, helpers, maxLength, minLength, required, sameAs} from "vuelidate/lib/validators";
+import {helpers, maxLength, minLength, required, sameAs} from "vuelidate/lib/validators";
 import Button from "@/components/Button/Button";
 import UserRouterLink1 from "@/components/UserRouterLink/UserRouterLink1";
 const passwordValidator = helpers.regex('alphaNumAndDot',/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,30}$/);
