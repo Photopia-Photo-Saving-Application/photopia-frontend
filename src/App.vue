@@ -4,7 +4,7 @@
 <!--      app>-->
 <!--    </v-app-bar>-->
 
-    <v-main>
+    <v-main >
       <router-view/>
     </v-main>
   </v-app>

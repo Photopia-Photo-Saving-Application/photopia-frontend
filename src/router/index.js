@@ -8,7 +8,7 @@ import ForgotPasswordResponse from "@/views/ForgotPasswordResponse";
 import SignUpResponse from "@/views/SignUpResponse";
 import SignUpVerification from "@/views/SignUpVerification";
 import RecoverAccount from "@/views/RecoverAccount";
-import Navbar from "@/components/Navbar/Navbar";
+import Settings from "@/views/Settings";
 
 Vue.use(VueRouter)
 
@@ -54,9 +54,9 @@ const routes = [
    component: RecoverAccount
   },
   {
-    path:'/navbar',
-    name:'Navbar',
-    component:Navbar
+    path:'/settings',
+    name:'Settings',
+    component:Settings
   }
   // {
   //   path: '/about',

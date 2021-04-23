@@ -1,15 +1,9 @@
 <template>
-    <v-card
-        class="mx-auto overflow-hidden"
-        width="100%"
-        height="100%"
-    >
-
+   <div>
         <v-app-bar
             color="secondary"
             dark
-            prominent
-            height="90%"
+            app
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
@@ -17,14 +11,12 @@
 
             <v-spacer></v-spacer>
 
-            <v-toolbar-title class=" justify-center" style="font-family: 'Dancing Script', cursive; "> PHOTOPIA</v-toolbar-title>
-
         </v-app-bar>
 
         <v-navigation-drawer
             v-model="drawer"
-            absolute
             temporary
+            app
         >
 
             <v-list
@@ -39,7 +31,7 @@
                 <v-list-item-group
                     v-model="group"
                     active-class="secondary--text accent"
-                    v-for="(item, index) in items"
+                    v-for="(item, index) in items" :key="index"
                 >
                     <v-list-item>
                         <UserRouterLink1 :to=item.to :text=item.message></UserRouterLink1>
@@ -48,10 +40,10 @@
             </v-list>
         </v-navigation-drawer>
 
-        <v-card-text>
-            The navigation drawer will appear from the bottom on smaller size screens.
-        </v-card-text>
-    </v-card>
+<!--        <v-card-text>-->
+<!--            The navigation drawer will appear from the bottom on smaller size screens.-->
+<!--        </v-card-text>-->
+   </div>
 </template>
 
 <script>
