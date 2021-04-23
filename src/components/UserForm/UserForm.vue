@@ -5,7 +5,7 @@
             <v-col cols="12" lg="4" sm="8">
 
                 <v-card elevation="5" class="pa-16">
-                    <v-card-title class=" justify-center" style="font-family: 'Dancing Script', cursive; font-size: 2em"> PHOTOPIA</v-card-title>
+                    <v-card-title class=" justify-center" style="font-family: 'Dancing Script', cursive; font-size: 1.6em"> PHOTOPIA</v-card-title>
                     <v-card-text class="text-h6 pt-4" >
                         <slot name="messageField"></slot>
                     </v-card-text>

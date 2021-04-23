@@ -38,18 +38,11 @@
                 </v-list-item-content>
                 <v-list-item-group
                     v-model="group"
-                    active-class="secondary--text text--accent"
+                    active-class="secondary--text accent"
+                    v-for="(item, index) in items"
                 >
                     <v-list-item>
-                        <v-list-item-title>Home</v-list-item-title>
-                    </v-list-item>
-
-                    <v-list-item>
-                        <v-list-item-title>Settings</v-list-item-title>
-                    </v-list-item>
-
-                    <v-list-item>
-                        <v-list-item-title>Logout</v-list-item-title>
+                        <UserRouterLink1 :to=item.to :text=item.message></UserRouterLink1>
                     </v-list-item>
                 </v-list-item-group>
             </v-list>
@@ -62,11 +55,19 @@
 </template>
 
 <script>
+import UserForm from "@/components/UserForm/UserForm";
+import UserRouterLink1 from "@/components/UserRouterLink/UserRouterLink1";
 export default {
 name: "Navbar",
+    components: {UserRouterLink1, UserForm},
     data: () => ({
         drawer: false,
         group: null,
+        items:[
+            {message:'Home', to:'/home'},
+            {message: 'Settings', to:'/settings'},
+            {message: 'Logout', to:'/signin'}
+        ]
     }),
 
     watch: {

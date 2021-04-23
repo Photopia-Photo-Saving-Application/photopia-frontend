@@ -4,7 +4,7 @@
         <MyText>
             <template #default>
             Verification Complete !! <br>
-            Please <router-link to="/signIn" style="text-decoration: none">Sign In</router-link>!!
+            Please <UserRouterLink1 to="/signIn" text="Sign In"></UserRouterLink1>!!
             </template>
         </MyText>
     </template>
@@ -14,9 +14,10 @@
 <script>
 import UserForm from "@/components/UserForm/UserForm";
 import MyText from "@/components/MyText/MyText";
+import UserRouterLink1 from "@/components/UserRouterLink/UserRouterLink1";
 export default {
 name: "SignUpVerification",
-    components: {MyText, UserForm}
+    components: {UserRouterLink1, MyText, UserForm}
 }
 </script>
 
