@@ -1,9 +1,13 @@
 <template>
   <div >
   <Navbar text="HOME"/>
-      <MyText>
-          Page under construction
-      </MyText>
+      <UserForm :show="false">
+          <template #messageField>
+              <MyText>
+                  Page Under Construction
+              </MyText>
+          </template>
+      </UserForm>
   </div>
 </template>
 
