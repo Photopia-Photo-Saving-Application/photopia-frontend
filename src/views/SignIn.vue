@@ -2,14 +2,14 @@
     <UserForm>
         <template #inputField>
             <v-text-field
-                v-model="name"
+                v-model.trim="name"
                 :error-messages="nameErrors"
                 label="Username"
                 required
                 @blur="$v.name.$touch()"
             ></v-text-field>
             <v-text-field
-                v-model="password"
+                v-model.trim="password"
                 type="password"
                 :error-messages="passwordErrors"
                 label="Password"

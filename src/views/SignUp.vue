@@ -2,22 +2,22 @@
     <UserForm>
         <template #inputField>
             <v-text-field
-                v-model="name"
+                v-model.trim="name"
                 :error-messages="nameErrors"
                 label="Name"
                 required
                 @blur="$v.name.$touch()"
             ></v-text-field>
             <v-text-field
-                v-model="email"
+                v-model.trim="email"
                 :error-messages="emailErrors"
-                label="E-mail"
+                label="Email"
                 required
                 @blur="$v.email.$touch()"
             ></v-text-field>
             <v-text-field
                 type="password"
-                v-model="newPassword"
+                v-model.trim="newPassword"
                 :error-messages="newPasswordErrors"
                 label="Enter new password"
                 required
@@ -25,7 +25,7 @@
             ></v-text-field>
             <v-text-field
                 type="password"
-                v-model="confirmPassword"
+                v-model.trim="confirmPassword"
                 :error-messages="confirmPasswordErrors"
                 label="Confirm new password"
                 required
@@ -86,7 +86,7 @@ export default {
         emailErrors() {
             const errors = []
             if (!this.$v.email.$dirty) return errors
-            !this.$v.email.email && errors.push('Must be valid e-mail')
+            !this.$v.email.email && errors.push('Must be valid email')
             !this.$v.email.required && errors.push('E-mail is required')
             return errors
         },
