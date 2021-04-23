@@ -46,7 +46,7 @@ export default {
             !this.$v.email.email && errors.push('Must be valid email')
             !this.$v.email.required && errors.push('E-mail is required')
             return errors
-        },
+        }
     },
 
     methods: {
