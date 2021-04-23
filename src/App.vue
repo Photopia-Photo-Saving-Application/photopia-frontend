@@ -11,13 +11,12 @@
 </template>
 
 <script>
-import SignIn  from './views/SignIn';
 
 export default {
   name: 'App',
 
   components: {
-    SignIn
+
   },
 
   data: () => ({

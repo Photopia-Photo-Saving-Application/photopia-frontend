@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from '../store';
+import {store} from '../store';
 
 const photopiaAPI = axios.create({
     baseURL: 'http://localhost:8888'
@@ -9,10 +9,10 @@ const photopiaAPI = axios.create({
 photopiaAPI.interceptors.request.use( (config)=>{
     // Do something before request is sent
     console.log("%cREQUEST TO "+config.url+": ",'color: #ff00ff',config.data);
-    // config.headers={
-    //     'Authorization':'Bearer '+store.getters['auth/getToken']
-    // }
-
+    config.headers={
+        'Authorization':'Bearer '+store.getters['getToken']
+    }
+    console.log("photopiaAPI: token = "+store.getters.getToken);
     // console.log('Bearer '+store.getters['auth/getToken']);
 
     return config;

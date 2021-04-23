@@ -8,10 +8,28 @@ export  default{
             let response = await photopiaAPI.post('/auth/signIn', payload);
             localStorage.setItem('token',response.data.payload.jwt);
             context.commit('setToken',{token:localStorage.getItem('token')},{root:true});
-            console.log(localStorage.getItem('token'));
             await router.push('/');
         } catch (e) {
             console.log("signIn catch error response data: ",e);
+        } finally {
+            context.commit('setLoading',{loading:false},{root:true});
+        }
+    },
+    async signInAuto(context){
+        if(localStorage.getItem('token')===null){
+            await router.push('/signIn');
+            return;
+        }
+        context.commit('setLoading',{loading:true},{root:true});
+        context.commit('setToken',{token:localStorage.getItem("token")},{root:true});
+        try {
+            let response = await photopiaAPI.get('/auth/signIn/auto');
+            console.log(response.data.status);
+        } catch (e) {
+            localStorage.removeItem('token');
+            context.commit('setToken',{token:null},{root:true});
+            await router.push('/signIn');
+            console.log("signInAuto catch error response data: ",e.message);
         } finally {
             context.commit('setLoading',{loading:false},{root:true});
         }

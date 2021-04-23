@@ -7,7 +7,7 @@ import rootMutations from './mutations'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+export const store=new Vuex.Store({
   state: {
     loading:false,
     token:null,
@@ -20,3 +20,4 @@ export default new Vuex.Store({
     auth: authModule
   }
 })
+store.dispatch('auth/signInAuto');
