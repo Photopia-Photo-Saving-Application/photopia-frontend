@@ -1,5 +1,5 @@
 <template>
-    <v-btn raised class="mt-5" :color=color :style="{width: width}" @click="click">
+    <v-btn raised class="mt-5" :color=color :style="{width: width}" @click="click" :disabled="disabled">
         {{text}}
     </v-btn>
 </template>
@@ -24,6 +24,9 @@ export default {
                 console.log("button component: default click");
             }
         },
+        'disabled':{
+            default:false
+        }
     }
 }
 </script>

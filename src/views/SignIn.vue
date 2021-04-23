@@ -6,20 +6,19 @@
                 :error-messages="nameErrors"
                 label="Username"
                 required
-                @input="$v.name.$touch()"
                 @blur="$v.name.$touch()"
             ></v-text-field>
             <v-text-field
                 v-model="password"
-                :error-messages="emailErrors"
+                type="password"
+                :error-messages="passwordErrors"
                 label="Password"
                 required
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
+                @blur="$v.password.$touch()"
             ></v-text-field>
         </template>
         <template #buttonField>
-            <Button width="100%" text="Sign In" color="primary" :click="submit"></Button>
+            <Button width="100%" text="Sign In" color="primary" :click="submit" :disabled="$v.$anyError"></Button>
         </template>
         <template #redirectionField>
             <UserRouterLink to1="/signup" to2="/forgotpassword" text1="Create a new account" text2="Forgot password"/>
@@ -29,60 +28,49 @@
 
 <script>
 import {validationMixin} from 'vuelidate'
-import {required, maxLength, email} from 'vuelidate/lib/validators'
+import {required, minLength, maxLength, email, alphaNum, helpers} from 'vuelidate/lib/validators'
 import UserForm from "@/components/UserForm/UserForm";
 import Button from "@/components/Button/Button";
 import UserRouterLink from "@/components/UserRouterLink/UserRouterLink";
-
+const passwordValidator = helpers.regex('alphaNumAndDot',/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,30}$/);
 export default {
     name: "SignIn",
     components: {Button, UserForm,UserRouterLink},
     mixins: [validationMixin],
 
     validations: {
-        name: {required, maxLength: maxLength(10)},
-        email: {required, email},
-        select: {required},
-        checkbox: {
-            checked(val) {
-                return val
-            },
+        name: {required, minLength: minLength(2)},
+        password:{
+            required,
+            minLength:minLength(5),
+            maxLength:maxLength(30),
+            passwordValidator
         },
     },
 
     data: () => ({
         name: '',
-        email: '',
         password:'',
+
     }),
 
     computed: {
-        checkboxErrors() {
-            const errors = []
-            if (!this.$v.checkbox.$dirty) return errors
-            !this.$v.checkbox.checked && errors.push('You must agree to continue!')
-            return errors
-        },
-        selectErrors() {
-            const errors = []
-            if (!this.$v.select.$dirty) return errors
-            !this.$v.select.required && errors.push('Item is required')
-            return errors
-        },
         nameErrors() {
             const errors = []
             if (!this.$v.name.$dirty) return errors
-            !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
+            !this.$v.name.minLength && errors.push('Name must be at least 2 characters long')
             !this.$v.name.required && errors.push('Name is required.')
             return errors
         },
-        emailErrors() {
+        passwordErrors() {
             const errors = []
-            if (!this.$v.email.$dirty) return errors
-            !this.$v.email.email && errors.push('Must be valid e-mail')
-            !this.$v.email.required && errors.push('E-mail is required')
+            if (!this.$v.password.$dirty) return errors
+            !this.$v.password.minLength && errors.push('Password must be at least 5 characters long')
+            !this.$v.password.maxLength && errors.push('Password must be at most 30 characters long')
+            !this.$v.password.passwordValidator && errors.push('Password must contain at least a digit and special character')
+            !this.$v.password.required && errors.push('Password is required.')
             return errors
-        },
+        }
     },
 
     methods: {
