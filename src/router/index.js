@@ -92,7 +92,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
+//code stable version
 router.beforeEach((to, from, next) => {
   console.log("to.name: "+to.name);
   console.log("localSorage.getItem(token): "+localStorage.getItem('token'));
