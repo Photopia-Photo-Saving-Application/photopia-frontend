@@ -32,7 +32,7 @@
                 ></v-text-field>
             </template>
             <template #buttonField>
-                <Button color="primary" text="CONFIRM" width="100%" :click=submit :disabled="$v.$anyError"></Button>
+                <Button color="primary" text="CONFIRM" width="100%" :click="submit" :disabled="$v.$anyError"></Button>
             </template>
             <template #redirectionField>
                 <UserRouterLink to1="/signIn" to2="/signIn" text1="Logout from all devices" text2="Delete account" :click1="signOutAllDevices" :click2="deleteAccount"></UserRouterLink>
@@ -110,10 +110,10 @@ export default {
     },
 
     methods: {
-        ...mapActions('auth',['signOutAllDevices','deleteAccount']),
-        submit() {
-            this.$v.$touch();
-            this.$router.push("/");
+        ...mapActions('auth',['signOutAllDevices','deleteAccount',"passwordChange"]),
+        async submit() {
+            await this.$v.$touch();
+            await this.passwordChange({oldpassword:this.currentPassword,newpassword:this.newPassword});
         },
         clear() {
             this.$v.$reset()

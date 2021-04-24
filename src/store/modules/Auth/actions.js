@@ -78,7 +78,7 @@ export  default{
     async signUp(context,payload){
         context.commit('setLoading',{loading:true},{root:true});
         try {
-            response = await photopiaAPI.post('/auth/signUp', payload);
+            await photopiaAPI.post('/auth/signUp', payload);
             await router.push('/signUp/notify');
         } catch (e) {
             console.log("signUp catch error response data: ",e.message);
@@ -90,14 +90,26 @@ export  default{
     async signUpVerify(context,payload){
         context.commit('setLoading',{loading:true},{root:true});
         try {
-            response = await photopiaAPI.get('/auth/signUp/verify',{ params:payload});
+            await photopiaAPI.get('/auth/signUp/verify',{ params:payload});
             return 1;
         } catch (e) {
-            console.log("signUp catch error response data: ",e.message);
+            console.log("signUpVerify catch error response data: ",e.message);
             return 0;
         } finally {
             context.commit('setLoading',{loading:false},{root:true});
         }
-    }
+    },
+
+    async passwordChange(context,payload){
+        context.commit('setLoading',{loading:true},{root:true});
+        try {
+            await photopiaAPI.patch('/auth/passwordChange', payload);
+            await router.push('/');
+        } catch (e) {
+            console.log("passwordChange catch error response data: ",e.message);
+        } finally {
+            context.commit('setLoading',{loading:false},{root:true});
+        }
+    },
 }
 
