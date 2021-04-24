@@ -87,17 +87,17 @@ export  default{
         }
     },
 
-    // async signUpVerify(context,payload){
-    //     context.commit('setLoading',{loading:true},{root:true});
-    //     try {
-    //         response = await photopiaAPI.get('/auth/signUp/verify',{ params:payload});
-    //         return 1;
-    //     } catch (e) {
-    //         console.log("signUp catch error response data: ",e.message);
-    //         return 0;
-    //     } finally {
-    //         context.commit('setLoading',{loading:false},{root:true});
-    //     }
-    // }
+    async signUpVerify(context,payload){
+        context.commit('setLoading',{loading:true},{root:true});
+        try {
+            response = await photopiaAPI.get('/auth/signUp/verify',{ params:payload});
+            return 1;
+        } catch (e) {
+            console.log("signUp catch error response data: ",e.message);
+            return 0;
+        } finally {
+            context.commit('setLoading',{loading:false},{root:true});
+        }
+    }
 }
 

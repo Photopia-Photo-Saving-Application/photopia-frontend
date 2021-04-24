@@ -34,15 +34,15 @@ name: "SignUpVerify",
         }
     },
     components: {UserRouterLink1, MyText, UserForm},
-    // async mounted(){
-    //     console.log( "signUpVerify: "+this.$route.query.code);
-    //     if(this.$route.query.code){
-    //         this.show=await this.signUpVerify({code:this.$route.query.code});
-    //     }
-    // },
-    // methods:{
-    //     ...mapActions("auth",["signUpVerify"]),
-    // }
+    async mounted(){
+        console.log( "signUpVerify: "+this.$route.query.code);
+        if(this.$route.query.code){
+            this.show=await this.signUpVerify({code:this.$route.query.code});
+        }
+    },
+    methods:{
+        ...mapActions("auth",["signUpVerify"]),
+    }
 }
 </script>
 
