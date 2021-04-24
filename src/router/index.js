@@ -101,10 +101,10 @@ router.beforeEach((to, from, next) => {
     console.log("router guard: you are not authenticated yet")
     next('/signIn');
   }
-  // else if(to.name==="SignUpNotify" && from.name!=="SignUp") {
-  //   console.log("router guard: you are not authenticated yet")
-  //   next('/signIn');
-  // }
+  else if(to.name==="SignUpNotify" && from.name!=="SignUp") {
+    console.log("router guard: you are not authenticated yet")
+    next('/signIn');
+  }
   else{
     console.log("inside else");
     next();
