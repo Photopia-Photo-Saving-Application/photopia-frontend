@@ -57,7 +57,7 @@ export default {
 
     }),
     mounted(){
-      console.log("SignIn mounted: getLoading = "+this.getLoading);
+      // console.log("SignIn mounted: getLoading = "+this.getLoading);
     },
     computed: {
         ...mapGetters(['getLoading']),

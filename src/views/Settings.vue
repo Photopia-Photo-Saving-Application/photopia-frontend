@@ -35,7 +35,7 @@
                 <Button color="primary" text="CONFIRM" width="100%" :click=submit :disabled="$v.$anyError"></Button>
             </template>
             <template #redirectionField>
-                <UserRouterLink to1="/signIn" to2="/signIn" text1="Logout from all devices" text2="Delete account"></UserRouterLink>
+                <UserRouterLink to1="/signIn" to2="/signIn" text1="Logout from all devices" text2="Delete account" :click1="signOutAllDevices"></UserRouterLink>
             </template>
         </UserForm>
     </div>
@@ -50,6 +50,7 @@ import {validationMixin} from "vuelidate";
 import {helpers, maxLength, minLength, required, sameAs} from "vuelidate/lib/validators";
 import Button from "@/components/Button/Button";
 import UserRouterLink1 from "@/components/UserRouterLink/UserRouterLink1";
+import {mapActions} from 'vuex'
 const passwordValidator = helpers.regex('alphaNumAndDot',/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,30}$/);
 
 export default {
@@ -109,6 +110,7 @@ export default {
     },
 
     methods: {
+        ...mapActions('auth',['signOutAllDevices']),
         submit() {
             this.$v.$touch();
             this.$router.push("/");

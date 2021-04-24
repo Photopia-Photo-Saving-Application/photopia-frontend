@@ -1,8 +1,8 @@
 <template>
     <div>
-        <b><router-link :to=to1 style="text-decoration: none" class="secondary--text">{{ text1 }}</router-link>
+        <b><router-link :to=to1 style="text-decoration: none" class="secondary--text" @click.native="click1">{{ text1 }}</router-link>
         <v-spacer/>
-        <router-link :to=to2 style="text-decoration: none " class="secondary--text">{{ text2 }}</router-link>
+        <router-link :to=to2 style="text-decoration: none " class="secondary--text" @click.native="click2">{{ text2 }}</router-link>
         </b>
     </div>
 </template>
@@ -22,6 +22,18 @@ export default {
         },
         'text2': {
             required: true
+        },
+        'click1':{
+            type:Function,
+            default:()=>{
+                console.log("UserRouterLink : default click1");
+            }
+        },
+        'click2':{
+            type:Function,
+            default:()=>{
+                console.log("UserRouterLink : default click2");
+            }
         }
     }
 }
