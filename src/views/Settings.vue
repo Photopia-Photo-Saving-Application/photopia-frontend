@@ -35,7 +35,7 @@
                 <Button color="primary" text="CONFIRM" width="100%" :click=submit :disabled="$v.$anyError"></Button>
             </template>
             <template #redirectionField>
-                <UserRouterLink to1="/signIn" to2="/signIn" text1="Logout from all devices" text2="Delete account" :click1="signOutAllDevices" :click2="deleteAccount"></UserRouterLink>
+                <UserRouterLink to1="/signIn" to2="/signIn" text1="Logout from all devices" text2="Delete account" :click1="signOutAllDevices" ></UserRouterLink>
             </template>
         </UserForm>
     </div>
@@ -110,7 +110,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('auth',['signOutAllDevices','deleteAccount']),
+        ...mapActions('auth',['signOutAllDevices']),
         submit() {
             this.$v.$touch();
             this.$router.push("/");
