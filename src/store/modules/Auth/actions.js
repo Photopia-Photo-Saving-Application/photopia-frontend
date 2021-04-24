@@ -62,18 +62,6 @@ export  default{
         }
     },
 
-    async deleteAccount(context){
-        context.commit('setLoading',{loading:true},{root:true});
-        try {
-            await photopiaAPI.delete('/auth/deleteAccount');
-            localStorage.removeItem('token');
-            context.commit('setToken',{token:null},{root:true});
-            await router.push('/signIn');
-        } catch (e) {
-            console.log("signInAuto catch error response data: ",e.message);
-        } finally {
-            context.commit('setLoading',{loading:false},{root:true});
-        }
-    }
+
 }
 
