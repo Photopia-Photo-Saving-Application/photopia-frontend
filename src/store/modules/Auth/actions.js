@@ -15,9 +15,9 @@ export  default{
             context.commit('setLoading',{loading:false},{root:true});
         }
     },
+
     async signInAuto(context){
-        if(localStorage.getItem('token')===null){
-            await router.push('/signIn');
+        if(localStorage.getItem('token')===undefined || localStorage.getItem('token')===null){
             return;
         }
         context.commit('setLoading',{loading:true},{root:true});
@@ -27,7 +27,6 @@ export  default{
         } catch (e) {
             localStorage.removeItem('token');
             context.commit('setToken',{token:null},{root:true});
-            await router.push('/signIn');
             console.log("signInAuto catch error response data: ",e.message);
         } finally {
             context.commit('setLoading',{loading:false},{root:true});
@@ -42,7 +41,7 @@ export  default{
             context.commit('setToken',{token:null},{root:true});
             await router.push('/signIn');
         } catch (e) {
-            console.log("signInAuto catch error response data: ",e.message);
+            console.log("signOut catch error response data: ",e.message);
         } finally {
             context.commit('setLoading',{loading:false},{root:true});
         }
@@ -56,12 +55,49 @@ export  default{
             context.commit('setToken',{token:null},{root:true});
             await router.push('/signIn');
         } catch (e) {
-            console.log("signInAuto catch error response data: ",e.message);
+            console.log("signOutAllDevices catch error response data: ",e.message);
         } finally {
             context.commit('setLoading',{loading:false},{root:true});
         }
     },
 
+    async deleteAccount(context){
+        context.commit('setLoading',{loading:true},{root:true});
+        try {
+            await photopiaAPI.delete('/auth/deleteAccount');
+            localStorage.removeItem('token');
+            context.commit('setToken',{token:null},{root:true});
+            await router.push('/signIn');
+        } catch (e) {
+            console.log("deleteAccount catch error response data: ",e.message);
+        } finally {
+            context.commit('setLoading',{loading:false},{root:true});
+        }
+    },
 
+    async signUp(context,payload){
+        context.commit('setLoading',{loading:true},{root:true});
+        try {
+            response = await photopiaAPI.post('/auth/signUp', payload);
+            await router.push('/signUp/notify');
+        } catch (e) {
+            console.log("signUp catch error response data: ",e.message);
+        } finally {
+            context.commit('setLoading',{loading:false},{root:true});
+        }
+    },
+
+    // async signUpVerify(context,payload){
+    //     context.commit('setLoading',{loading:true},{root:true});
+    //     try {
+    //         response = await photopiaAPI.get('/auth/signUp/verify',{ params:payload});
+    //         return 1;
+    //     } catch (e) {
+    //         console.log("signUp catch error response data: ",e.message);
+    //         return 0;
+    //     } finally {
+    //         context.commit('setLoading',{loading:false},{root:true});
+    //     }
+    // }
 }
 

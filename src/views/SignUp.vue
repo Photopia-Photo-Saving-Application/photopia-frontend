@@ -33,7 +33,7 @@
             ></v-text-field>
         </template>
         <template #buttonField>
-            <Button width="100%" text="Sign Up" color="primary" :click="submit" :disabled="$v.$anyError"></Button>
+            <Button width="100%" text="Sign Up" color="primary" :click="submit" :disabled="$v.$anyError || getLoading"></Button>
         </template>
         <template #redirectionField>
             <UserRouterLink to1="/signin" to2="/forgotpassword" text1="Sign in " text2="Forgot password"/>
@@ -47,6 +47,7 @@ import UserForm from "@/components/UserForm/UserForm";
 import UserRouterLink from "@/components/UserRouterLink/UserRouterLink";
 import {validationMixin} from "vuelidate";
 import {email, helpers, maxLength, minLength, required,sameAs} from "vuelidate/lib/validators";
+import {mapActions,mapGetters} from 'vuex'
 const passwordValidator = helpers.regex('alphaNumAndDot',/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,30}$/);
 
 export default {
@@ -76,6 +77,7 @@ export default {
     }),
 
     computed: {
+        ...mapGetters(['getLoading']),
         nameErrors() {
             const errors = []
             if (!this.$v.name.$dirty) return errors
@@ -108,9 +110,12 @@ export default {
     },
 
     methods: {
-        submit() {
-            this.$v.$touch();
-            this.$router.push("/signUp/notify");
+        ...mapActions('auth',['signUp']),
+        async submit() {
+            await this.$v.$touch();
+            if(!this.$v.$anyError){
+                await this.signUp({name:this.name,email:this.email,password:this.confirmPassword});
+            }
         },
         clear() {
             this.$v.$reset()

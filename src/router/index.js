@@ -94,11 +94,19 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.meta.requiresAuth && localStorage.getItem('token')===null){
+  console.log("to.name: "+to.name);
+  console.log("localSorage.getItem(token): "+localStorage.getItem('token'));
+  console.log("to.meta.requiresAuth: "+to.meta.requiresAuth);
+  if(to.meta.requiresAuth && (localStorage.getItem('token')===undefined || localStorage.getItem('token')===null)){
     console.log("router guard: you are not authenticated yet")
     next('/signIn');
   }
+  // else if(to.name==="SignUpNotify" && from.name!=="SignUp") {
+  //   console.log("router guard: you are not authenticated yet")
+  //   next('/signIn');
+  // }
   else{
+    console.log("inside else");
     next();
   }
 });
