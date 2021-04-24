@@ -1,13 +1,23 @@
 <template>
 <UserForm>
     <template #messageField>
-        <MyText>
+        <MyText v-if="show===1">
             <template #default>
                 Reset your password.
             </template>
         </MyText>
+        <MyText v-if="show===0">
+            <template #default>
+                Please wait for you email verification.
+            </template>
+        </MyText>
+        <MyText v-if="show===-1">
+            <template #default>
+                Sorry !! Something went wrong.
+            </template>
+        </MyText>
     </template>
-    <template #inputField>
+    <template #inputField v-if="show===1">
         <v-text-field
             type="password"
             v-model="newPassword"
@@ -25,7 +35,7 @@
             @blur="$v.confirmPassword.$touch()"
         ></v-text-field>
     </template>
-    <template #buttonField>
+    <template #buttonField v-if="show===1">
         <Button width="100%" text="Sign In" color="primary" :click="submit" :disabled="$v.$anyError">Sign In</Button>
     </template>
 </UserForm>
@@ -59,7 +69,8 @@ export default {
 
     data: () => ({
         newPassword:'',
-        confirmPassword:''
+        confirmPassword:'',
+        show:-1,
     }),
 
     computed: {

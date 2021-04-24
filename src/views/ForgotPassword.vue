@@ -10,7 +10,7 @@
             ></v-text-field>
         </template>
         <template #buttonField>
-            <Button width="100%" text="Recover Account" color="primary" :click="submit" :disabled="$v.$anyError"></Button>
+            <Button width="100%" text="Recover Account" color="primary" :click="submit" :disabled="$v.$anyError || getLoading"></Button>
         </template>
         <template #redirectionField>
             <UserRouterLink to1="/signin" to2="/signup" text1="Sign In" text2="Create a new account"/>
@@ -24,6 +24,7 @@ import UserForm from "@/components/UserForm/UserForm";
 import UserRouterLink from "@/components/UserRouterLink/UserRouterLink";
 import {validationMixin} from "vuelidate";
 import {email, maxLength, required} from "vuelidate/lib/validators";
+import {mapActions,mapGetters} from "vuex"
 
 export default {
     name: "ForgotPassword",
@@ -35,11 +36,11 @@ export default {
     },
 
     data: () => ({
-        name: '',
         email: '',
     }),
 
     computed: {
+        ...mapGetters(['getLoading']),
         emailErrors() {
             const errors = []
             if (!this.$v.email.$dirty) return errors
@@ -50,9 +51,10 @@ export default {
     },
 
     methods: {
-        submit() {
-            this.$v.$touch();
-            this.$router.push("/recoverAccount/notify");
+        ...mapActions('auth',["forgotPassword"]),
+        async submit() {
+            await this.$v.$touch();
+            // await this.forgotPassword({email:this.email});
         },
         clear() {
             this.$v.$reset()

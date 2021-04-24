@@ -105,7 +105,7 @@ router.beforeEach((to, from, next) => {
     console.log("router guard: you are not authenticated yet 1st else if block")
     next('/signIn');
   }
-  else if(to.name==="RecoverAccountNotify" && from.name!=="RecoverAccount") {
+  else if(to.name==="RecoverAccountNotify" && from.name!=="ForgotPassword") {
     console.log("router guard: you are not authenticated yet 2nd else if block")
     next('/signIn');
   }

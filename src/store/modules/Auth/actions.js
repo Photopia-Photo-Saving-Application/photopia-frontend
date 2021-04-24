@@ -112,6 +112,16 @@ export  default{
         }
     },
 
-
+    async forgotPassword(context,payload){
+        context.commit('setLoading',{loading:true},{root:true});
+        try {
+            await photopiaAPI.patch('/auth/forgotPassword', payload);
+            await router.push('/recoverAccount/notify');
+        } catch (e) {
+            console.log("forgotPassword catch error response data: ",e.message);
+        } finally {
+            context.commit('setLoading',{loading:false},{root:true});
+        }
+    },
 }
 
