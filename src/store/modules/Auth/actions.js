@@ -115,7 +115,7 @@ export  default{
     async forgotPassword(context,payload){
         context.commit('setLoading',{loading:true},{root:true});
         try {
-            await photopiaAPI.patch('/auth/forgotPassword', payload);
+            await photopiaAPI.patch('/auth/forgotPassword',payload);
             await router.push('/recoverAccount/notify');
         } catch (e) {
             console.log("forgotPassword catch error response data: ",e.message);
@@ -123,5 +123,21 @@ export  default{
             context.commit('setLoading',{loading:false},{root:true});
         }
     },
+
+    // async recoverAccount(context,payload){
+    //     context.commit('setLoading',{loading:true},{root:true});
+    //     try {
+    //         console.log("recoverAccount: code = "+payload.code);
+    //         await photopiaAPI.patch('/auth/recoverAccount?code='+payload.code,{password:payload.password});
+    //         console.log("recoverAccount2");
+    //         await router.push('/signIn');
+    //         return 1;
+    //     } catch (e) {
+    //         console.log("recoverAccount catch error response data: ",e.message);
+    //         return 0;
+    //     } finally {
+    //         context.commit('setLoading',{loading:false},{root:true});
+    //     }
+    // },
 }
 

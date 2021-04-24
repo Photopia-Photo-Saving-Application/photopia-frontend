@@ -8,16 +8,11 @@
         </MyText>
         <MyText v-if="show===0">
             <template #default>
-                Please wait for you email verification.
-            </template>
-        </MyText>
-        <MyText v-if="show===-1">
-            <template #default>
                 Sorry !! Something went wrong.
             </template>
         </MyText>
     </template>
-    <template #inputField v-if="show===1">
+    <template #inputField >
         <v-text-field
             type="password"
             v-model="newPassword"
@@ -35,8 +30,8 @@
             @blur="$v.confirmPassword.$touch()"
         ></v-text-field>
     </template>
-    <template #buttonField v-if="show===1">
-        <Button width="100%" text="Sign In" color="primary" :click="submit" :disabled="$v.$anyError">Sign In</Button>
+    <template #buttonField >
+        <Button width="100%" text="RECOVER ACCOUNT" color="primary" :click="submit" :disabled="$v.$anyError || getLoading"></Button>
     </template>
 </UserForm>
 </template>
@@ -48,6 +43,7 @@ import UserRouterLink from "@/components/UserRouterLink/UserRouterLink";
 import {validationMixin} from "vuelidate";
 import {maxLength, minLength, required, sameAs, helpers} from "vuelidate/lib/validators";
 import MyText from "@/components/MyText/MyText";
+import {mapActions,mapGetters} from 'vuex'
 const passwordValidator = helpers.regex('alphaNumAndDot',/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,30}$/);
 
 export default {
@@ -70,10 +66,11 @@ export default {
     data: () => ({
         newPassword:'',
         confirmPassword:'',
-        show:-1,
+        show:1,
     }),
 
     computed: {
+        ...mapGetters(['getLoading']),
         newPasswordErrors() {
             const errors = []
             if (!this.$v.newPassword.$dirty) return errors
@@ -92,9 +89,10 @@ export default {
     },
 
     methods: {
-        submit() {
-            this.$v.$touch();
-            this.$router.push("/");
+        // ...mapActions('auth',['recoverAccount']),
+        async submit() {
+            await this.$v.$touch();
+            // this.show=await this.recoverAccount({password:this.newPassword,code:this.$route.query.code});
         },
         clear() {
             this.$v.$reset()

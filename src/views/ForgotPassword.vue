@@ -10,7 +10,7 @@
             ></v-text-field>
         </template>
         <template #buttonField>
-            <Button width="100%" text="Recover Account" color="primary" :click="submit" :disabled="$v.$anyError || getLoading"></Button>
+            <Button width="100%" text="SEND EMAIL" color="primary" :click="submit" :disabled="$v.$anyError || getLoading"></Button>
         </template>
         <template #redirectionField>
             <UserRouterLink to1="/signin" to2="/signup" text1="Sign In" text2="Create a new account"/>
@@ -54,7 +54,7 @@ export default {
         ...mapActions('auth',["forgotPassword"]),
         async submit() {
             await this.$v.$touch();
-            // await this.forgotPassword({email:this.email});
+            await this.forgotPassword({email:this.email});
         },
         clear() {
             this.$v.$reset()
