@@ -89,10 +89,10 @@ export default {
     },
 
     methods: {
-        // ...mapActions('auth',['recoverAccount']),
+        ...mapActions('auth',['recoverAccount']),
         async submit() {
             await this.$v.$touch();
-            // this.show=await this.recoverAccount({password:this.newPassword,code:this.$route.query.code});
+            this.show=await this.recoverAccount({password:this.newPassword,code:this.$route.query.code});
         },
         clear() {
             this.$v.$reset()
