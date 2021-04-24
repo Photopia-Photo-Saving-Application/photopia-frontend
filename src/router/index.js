@@ -98,6 +98,7 @@ router.beforeEach((to, from, next) => {
   console.log("localSorage.getItem(token): "+localStorage.getItem('token'));
   console.log("to.meta.requiresAuth: "+to.meta.requiresAuth);
   if(to.meta.requiresAuth && (localStorage.getItem('token')===undefined || localStorage.getItem('token')===null)){
+<<<<<<< HEAD
     console.log("router guard: you are not authenticated yet if block block")
     next('/signIn');
   }
@@ -107,6 +108,17 @@ router.beforeEach((to, from, next) => {
   }
   else if(to.name==="RecoverAccountNotify" && from.name!=="RecoverAccount") {
     console.log("router guard: you are not authenticated yet 2nd else if block")
+=======
+    console.log("router guard: you are not authenticated yet if block")
+    next('/signIn');
+  }
+  else if(to.name==="SignUpNotify" && from.name!=="SignUp") {
+    console.log("router guard: you are not authenticated yet 1st else if")
+    next('/signIn');
+  }
+  else if(to.name==="RecoverAccountNotify" && from.name!=="RecoverAccount") {
+    console.log("router guard: you are not authenticated yet 2nd else if")
+>>>>>>> 683116d783b775caf9c9556961bbb28511c1e159
     next('/signIn');
   }
   else{
