@@ -98,15 +98,19 @@ router.beforeEach((to, from, next) => {
   console.log("localSorage.getItem(token): "+localStorage.getItem('token'));
   console.log("to.meta.requiresAuth: "+to.meta.requiresAuth);
   if(to.meta.requiresAuth && (localStorage.getItem('token')===undefined || localStorage.getItem('token')===null)){
-    console.log("router guard: you are not authenticated yet")
+    console.log("router guard: you are not authenticated yet if block")
     next('/signIn');
   }
   else if(to.name==="SignUpNotify" && from.name!=="SignUp") {
-    console.log("router guard: you are not authenticated yet")
+    console.log("router guard: you are not authenticated yet 1st else if")
+    next('/signIn');
+  }
+  else if(to.name==="RecoverAccountNotify" && from.name!=="RecoverAccount") {
+    console.log("router guard: you are not authenticated yet 2nd else if")
     next('/signIn');
   }
   else{
-    console.log("inside else");
+    console.log("router guard: else block");
     next();
   }
 });
