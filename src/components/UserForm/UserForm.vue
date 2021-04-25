@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid style="margin-top: 3%;background-image: url('src/assets/image/background.jpg'); background-size: cover;">
+    <v-container fluid style="margin-top: 3%;">
         <v-row>
             <v-col cols="12" lg="4" sm="2"></v-col>
             <v-col cols="12" lg="4" sm="8">
