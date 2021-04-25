@@ -17,7 +17,10 @@
               aspect-ratio="1.3"
               class="grey lighten-2 rounded-lg"
           >
-
+              <v-btn
+                  class="mx-2" icon dark absolute top right large>
+                  <v-icon>mdi-delete-outline</v-icon>
+              </v-btn>
               <template v-slot:placeholder>
                   <v-row
                       class="fill-height ma-0"
