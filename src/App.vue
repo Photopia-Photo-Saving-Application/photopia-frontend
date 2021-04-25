@@ -1,10 +1,10 @@
 <template>
-    <v-app style="font-family: 'New Tegomin', serif; font-size: 1.5em">
+    <v-app style="font-family: 'New Tegomin', serif; font-size: 1.5em" >
         <!--    <v-app-bar-->
         <!--      app>-->
         <!--    </v-app-bar>-->
 
-        <v-main>
+        <v-main >
 
             <v-layout align-center justify-center column fill-height v-if="getSignInAutoFlag">
                 <v-flex row align-center>
