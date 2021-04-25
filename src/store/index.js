@@ -11,6 +11,7 @@ export const store=new Vuex.Store({
   state: {
     loading:false,
     token:null,
+    dialogFlag:false
   },
   getters:rootGetters,
   mutations: rootMutations,

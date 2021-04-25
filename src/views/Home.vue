@@ -17,8 +17,9 @@
                         aspect-ratio="1.3"
                         class="grey lighten-2 rounded-lg"
                     >
-                        <v-btn
-                            class="mx-2" icon dark absolute top right large>
+
+                        <v-btn @click="deleteClicked"
+                               icon dark absolute top right large>
                             <v-icon>mdi-delete-outline</v-icon>
                         </v-btn>
                         <template v-slot:placeholder>
@@ -36,47 +37,22 @@
                     </v-img>
                 </v-col>
             </v-row>
-            <v-dialog
-                v-model="dialog"
-                persistent
-                max-width="290"
-            >
-                <template v-slot:activator="{ on, attrs }">
-                    <v-fab-transition>
-                        <v-btn color="primary" dark fixed bottom right fab v-bind="attrs"
-                               v-on="on">
-                            <v-icon>mdi-plus</v-icon>
-                        </v-btn>
-                    </v-fab-transition>
+            <v-fab-transition>
+                <v-btn color="primary" dark fixed bottom right fab @click="uploadClicked">
+                    <v-icon>mdi-plus</v-icon>
+                </v-btn>
+            </v-fab-transition>
+            <MyDialog v-if="uploadShow" color1="yellow" color2="light-green accent-3" text1="Cancel" text2="Upload" >
+                <template #title>
+                    Upload a photo
                 </template>
-                <v-card>
-                    <v-card-title class="headline">
-                        Use Google's location service?
-                    </v-card-title>
-                    <v-card-text>Let Google help apps determine location. This means sending anonymous location data to
-                        Google, even when no apps are running.
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn
-                            color="green darken-1"
-                            text
-                            @click="dialog = false"
-                        >
-                            Disagree
-                        </v-btn>
-                        <v-btn
-                            color="green darken-1"
-                            text
-                            @click="dialog = false"
-                        >
-                            Agree
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
+            </MyDialog>
+            <MyDialog v-if="deleteShow" color1="yellow" color2="red darken-2" text1="Cancel" text2="Delete">
+                <template #title>
+                    Delete photo ?
+                </template>
+            </MyDialog>
         </v-container>
-
     </div>
 </template>
 
@@ -84,17 +60,32 @@
 import Navbar from "@/components/Navbar/Navbar";
 import UserForm from "@/components/UserForm/UserForm";
 import MyText from "@/components/MyText/MyText";
+import MyDialog from "@/components/MyDialog/MyDialog";
+import {mapMutations} from 'vuex'
 
 export default {
     name: 'Home',
     components: {
+        MyDialog,
         MyText,
         UserForm,
         Navbar
     },
     data: () => {
         return {
-            dialog: false
+            uploadShow: false,
+            deleteShow:false
+        }
+    },
+    methods: {
+        ...mapMutations(['setDialogFlag']),
+        uploadClicked(){
+            this.uploadShow=true;
+            this.setDialogFlag({dialogFlag:true});
+        },
+        deleteClicked(){
+            this.deleteShow=true;
+            this.setDialogFlag({dialogFlag:true});
         }
     }
 }

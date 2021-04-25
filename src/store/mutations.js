@@ -4,5 +4,8 @@ export default{
     },
     setToken:(state,payload)=>{
         state.token=payload.token;
+    },
+    setDialogFlag:(state,payload)=>{
+        state.dialogFlag=payload.dialogFlag;
     }
 }
