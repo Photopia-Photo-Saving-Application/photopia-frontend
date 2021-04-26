@@ -5,7 +5,16 @@ export default{
     setToken:(state,payload)=>{
         state.token=payload.token;
     },
-    setDialogFlag:(state,payload)=>{
-        state.dialogFlag=payload.dialogFlag;
-    }
+    setUploadDialogFlag:(state,payload)=>{
+        state.uploadDialogFlag=payload.uploadDialogFlag;
+    },
+    setDeleteDialogFlag:(state,payload)=>{
+        state.deleteDialogFlag=payload.deleteDialogFlag;
+    },
+    setLogoutDialogFlag:(state,payload)=>{
+        state.logoutDialogFlag=payload.logoutDialogFlag;
+    },
+    setDeleteAccountDialogFlag:(state,payload)=>{
+        state.deleteAccountDialogFlag=payload.deleteAccountDialogFlag;
+    },
 }

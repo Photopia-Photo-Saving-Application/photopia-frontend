@@ -1,27 +1,28 @@
 <template>
     <v-dialog
         persistent
+        v-model="getUploadDialogFlag"
         max-width="290">
         <v-card>
             <v-card-title class="headline">
-                <MyText><slot name="title"/></MyText>
+                <MyText>Upload a photo</MyText>
             </v-card-title>
             <v-card-actions>
                 <slot name="file"/>
             </v-card-actions>
             <v-card-actions>
                 <v-btn
-                    :color="color1"
-                    @click="setDialogFlag({dialogFlag:false})"
+                    color="yellow"
+                    @click="setUploadDialogFlag({uploadDialogFlag:false})"
                 >
-                    {{text1}}
+                    Cancel
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
-                    :color="color2"
-                    @click="setDialogFlag({dialogFlag:false})"
+                    color="light-green accent-3"
+                    @click="setUploadDialogFlag({uploadDialogFlag:false})"
                 >
-                    {{text2}}
+                    Upload
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -32,27 +33,13 @@
 import {mapGetters,mapMutations} from 'vuex'
 import MyText from "@/components/MyText/MyText";
 export default {
-    name: "MyDialog",
+    name: "UploadDialog",
     components: {MyText},
     computed:{
-      ...mapGetters(['getDialogFlag'])  ,
-    },
-    props: {
-        'color1': {
-            required:true
-        },
-        'color2': {
-            required: true
-        },
-        'text1':{
-            required:true
-        },
-        'text2':{
-            required:true
-        }
+      ...mapGetters(['getUploadDialogFlag'])  ,
     },
     methods:{
-        ...mapMutations(['setDialogFlag']),
+        ...mapMutations(['setUploadDialogFlag']),
     }
 }
 </script>

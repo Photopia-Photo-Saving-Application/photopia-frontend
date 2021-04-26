@@ -11,7 +11,10 @@ export const store=new Vuex.Store({
   state: {
     loading:false,
     token:null,
-    dialogFlag:false
+    uploadDialogFlag:false,
+    deleteDialogFlag:false,
+    logoutDialogFlag:false,
+    deleteAccountDialogFlag:false
   },
   getters:rootGetters,
   mutations: rootMutations,

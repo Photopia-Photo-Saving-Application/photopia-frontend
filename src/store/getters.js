@@ -5,7 +5,16 @@ export default {
     getToken:state=>{
         return state.token;
     },
-    getDialogFlag:state=>{
-        return state.dialogFlag
+    getUploadDialogFlag:state=>{
+        return state.uploadDialogFlag
+    },
+    getDeleteDialogFlag:state=>{
+        return state.deleteDialogFlag
+    },
+    getDeleteAccountDialogFlag:state=>{
+        return state.deleteAccountDialogFlag
+    },
+    getLogoutDialogFlag:state=>{
+        return state.logoutDialogFlag
     }
 }

@@ -42,16 +42,7 @@
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </v-fab-transition>
-            <MyDialog v-if="uploadShow" color1="yellow" color2="light-green accent-3" text1="Cancel" text2="Upload" >
-                <template #title>
-                    Upload a photo
-                </template>
-            </MyDialog>
-            <MyDialog v-if="deleteShow" color1="yellow" color2="red darken-2" text1="Cancel" text2="Delete">
-                <template #title>
-                    Delete photo ?
-                </template>
-            </MyDialog>
+           <UploadDialog />
         </v-container>
     </div>
 </template>
@@ -60,32 +51,32 @@
 import Navbar from "@/components/Navbar/Navbar";
 import UserForm from "@/components/UserForm/UserForm";
 import MyText from "@/components/MyText/MyText";
-import MyDialog from "@/components/MyDialog/MyDialog";
-import {mapMutations} from 'vuex'
+import {mapGetters,mapMutations} from 'vuex'
+import UploadDialog from "@/components/MyDialog/UploadDialog";
 
 export default {
     name: 'Home',
     components: {
-        MyDialog,
+        UploadDialog,
         MyText,
         UserForm,
         Navbar
     },
+    computed:{
+      ...mapGetters(['getUploadDialogFlag','getDeleteDialogFlag'])  ,
+    },
     data: () => {
         return {
-            uploadShow: false,
-            deleteShow:false
+
         }
     },
     methods: {
-        ...mapMutations(['setDialogFlag']),
+        ...mapMutations(['setUploadDialogFlag','setDeleteDialogFlag']),
         uploadClicked(){
-            this.uploadShow=true;
-            this.setDialogFlag({dialogFlag:true});
+            this.setUploadDialogFlag({uploadDialogFlag:true});
         },
         deleteClicked(){
-            this.deleteShow=true;
-            this.setDialogFlag({dialogFlag:true});
+            this.setDeleteDialogFlag({deleteDialogFlag:true});
         }
     }
 }
