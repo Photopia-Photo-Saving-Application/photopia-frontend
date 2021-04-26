@@ -1,5 +1,8 @@
 export default{
-    setSignInAutoFlag:(state,payload)=>{
-        state.signInAutoFlag=payload.signInAutoFlag;
+    setSignInAutoFlag:(state)=>{
+        state.signInAutoFlag=!state.signInAutoFlag;
+    },
+    setSignOutFlag:(state)=>{
+        state.signOutFlag=!state.signOutFlag;
     }
 }

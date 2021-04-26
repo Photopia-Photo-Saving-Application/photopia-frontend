@@ -21,7 +21,7 @@ export  default{
             return;
         }
         context.commit('setLoading',{},{root:true});
-        context.commit('setSignInAutoFlag',{signInAutoFlag:true});
+        context.commit('setSignInAutoFlag');
         context.commit('setToken',{token:localStorage.getItem("token")},{root:true});
         try {
             await photopiaAPI.get('/auth/signIn/auto');
@@ -30,12 +30,13 @@ export  default{
             context.commit('setToken',{token:null},{root:true});
             console.log("signInAuto catch error response data: ",e.message);
         } finally {
-            context.commit('setSignInAutoFlag',{signInAutoFlag:false});
+            context.commit('setSignInAutoFlag');
             context.commit('setLoading',{},{root:true});
         }
     },
 
     async signOut(context){
+        context.commit('setSignInAutoFlag');
         context.commit('setLoading',{},{root:true});
         try {
             await photopiaAPI.post('/auth/signOut');
