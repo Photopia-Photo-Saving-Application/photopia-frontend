@@ -18,7 +18,7 @@
                         class="grey lighten-2 rounded-lg"
                     >
 
-                        <v-btn @click="deleteClicked"
+                        <v-btn @click="setDeleteDialogFlag({deleteDialogFlag:true})"
                                icon dark absolute top right large>
                             <v-icon>mdi-delete-outline</v-icon>
                         </v-btn>
@@ -38,11 +38,12 @@
                 </v-col>
             </v-row>
             <v-fab-transition>
-                <v-btn color="primary" dark fixed bottom right fab @click="uploadClicked">
+                <v-btn color="primary" dark fixed bottom right fab @click="setUploadDialogFlag({uploadDialogFlag:true})">
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </v-fab-transition>
            <UploadDialog />
+            <DeleteDialog/>
         </v-container>
     </div>
 </template>
@@ -53,17 +54,19 @@ import UserForm from "@/components/UserForm/UserForm";
 import MyText from "@/components/MyText/MyText";
 import {mapGetters,mapMutations} from 'vuex'
 import UploadDialog from "@/components/MyDialog/UploadDialog";
+import DeleteDialog from "@/components/MyDialog/DeleteDialog";
 
 export default {
     name: 'Home',
     components: {
+        DeleteDialog,
         UploadDialog,
         MyText,
         UserForm,
         Navbar
     },
     computed:{
-      ...mapGetters(['getUploadDialogFlag','getDeleteDialogFlag'])  ,
+      // ...mapGetters(['getUploadDialogFlag','getDeleteDialogFlag'])  ,
     },
     data: () => {
         return {
@@ -72,12 +75,12 @@ export default {
     },
     methods: {
         ...mapMutations(['setUploadDialogFlag','setDeleteDialogFlag']),
-        uploadClicked(){
-            this.setUploadDialogFlag({uploadDialogFlag:true});
-        },
-        deleteClicked(){
-            this.setDeleteDialogFlag({deleteDialogFlag:true});
-        }
+        // uploadClicked(){
+        //     this.setUploadDialogFlag({uploadDialogFlag:true});
+        // },
+        // deleteClicked(){
+        //     this.setDeleteDialogFlag({deleteDialogFlag:true});
+        // }
     }
 }
 </script>
