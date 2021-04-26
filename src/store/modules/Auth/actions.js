@@ -3,7 +3,7 @@ import {photopiaAPI} from '@/api';
 let response;
 export  default{
     async signIn(context,payload){
-        context.commit('setLoading',{loading:true},{root:true});
+        context.commit('setLoading',{},{root:true});
         try {
             response = await photopiaAPI.post('/auth/signIn', payload);
             localStorage.setItem('token',response.data.payload.jwt);
@@ -12,7 +12,7 @@ export  default{
         } catch (e) {
             console.log("signIn catch error response data: ",e.message);
         } finally {
-            context.commit('setLoading',{loading:false},{root:true});
+            context.commit('setLoading',{},{root:true});
         }
     },
 
@@ -20,7 +20,7 @@ export  default{
         if(localStorage.getItem('token')===undefined || localStorage.getItem('token')===null){
             return;
         }
-        context.commit('setLoading',{loading:true},{root:true});
+        context.commit('setLoading',{},{root:true});
         context.commit('setSignInAutoFlag',{signInAutoFlag:true});
         context.commit('setToken',{token:localStorage.getItem("token")},{root:true});
         try {
@@ -31,12 +31,12 @@ export  default{
             console.log("signInAuto catch error response data: ",e.message);
         } finally {
             context.commit('setSignInAutoFlag',{signInAutoFlag:false});
-            context.commit('setLoading',{loading:false},{root:true});
+            context.commit('setLoading',{},{root:true});
         }
     },
 
     async signOut(context){
-        context.commit('setLoading',{loading:true},{root:true});
+        context.commit('setLoading',{},{root:true});
         try {
             await photopiaAPI.post('/auth/signOut');
             localStorage.removeItem('token');
@@ -45,12 +45,13 @@ export  default{
         } catch (e) {
             console.log("signOut catch error response data: ",e.message);
         } finally {
-            context.commit('setLoading',{loading:false},{root:true});
+            context.commit('setLoading',{},{root:true});
         }
     },
 
     async signOutAllDevices(context){
-        context.commit('setLoading',{loading:true},{root:true});
+        console.log("inside signOutAllDevices")
+        context.commit('setLoading',{},{root:true});
         try {
             await photopiaAPI.post('/auth/signOutAllDevices');
             localStorage.removeItem('token');
@@ -59,12 +60,12 @@ export  default{
         } catch (e) {
             console.log("signOutAllDevices catch error response data: ",e.message);
         } finally {
-            context.commit('setLoading',{loading:false},{root:true});
+            context.commit('setLoading',{},{root:true});
         }
     },
 
     async deleteAccount(context){
-        context.commit('setLoading',{loading:true},{root:true});
+        context.commit('setLoading',{},{root:true});
         try {
             await photopiaAPI.delete('/auth/deleteAccount');
             localStorage.removeItem('token');
@@ -73,24 +74,24 @@ export  default{
         } catch (e) {
             console.log("deleteAccount catch error response data: ",e.message);
         } finally {
-            context.commit('setLoading',{loading:false},{root:true});
+            context.commit('setLoading',{},{root:true});
         }
     },
 
     async signUp(context,payload){
-        context.commit('setLoading',{loading:true},{root:true});
+        context.commit('setLoading',{},{root:true});
         try {
             await photopiaAPI.post('/auth/signUp', payload);
             await router.push('/signUp/notify');
         } catch (e) {
             console.log("signUp catch error response data: ",e.message);
         } finally {
-            context.commit('setLoading',{loading:false},{root:true});
+            context.commit('setLoading',{},{root:true});
         }
     },
 
     async signUpVerify(context,payload){
-        context.commit('setLoading',{loading:true},{root:true});
+        context.commit('setLoading',{},{root:true});
         try {
             await photopiaAPI.get('/auth/signUp/verify',{ params:payload});
             return 1;
@@ -98,36 +99,36 @@ export  default{
             console.log("signUpVerify catch error response data: ",e.message);
             return 0;
         } finally {
-            context.commit('setLoading',{loading:false},{root:true});
+            context.commit('setLoading',{},{root:true});
         }
     },
 
     async passwordChange(context,payload){
-        context.commit('setLoading',{loading:true},{root:true});
+        context.commit('setLoading',{},{root:true});
         try {
             await photopiaAPI.patch('/auth/passwordChange', payload);
             await router.push('/');
         } catch (e) {
             console.log("passwordChange catch error response data: ",e.message);
         } finally {
-            context.commit('setLoading',{loading:false},{root:true});
+            context.commit('setLoading',{},{root:true});
         }
     },
 
     async forgotPassword(context,payload){
-        context.commit('setLoading',{loading:true},{root:true});
+        context.commit('setLoading',{},{root:true});
         try {
             await photopiaAPI.patch('/auth/forgotPassword',payload);
             await router.push('/recoverAccount/notify');
         } catch (e) {
             console.log("forgotPassword catch error response data: ",e.message);
         } finally {
-            context.commit('setLoading',{loading:false},{root:true});
+            context.commit('setLoading',{},{root:true});
         }
     },
 
     async recoverAccount(context,payload){
-        context.commit('setLoading',{loading:true},{root:true});
+        context.commit('setLoading',{},{root:true});
         try {
             console.log("recoverAccount: code = "+payload.code);
             await photopiaAPI.patch('/auth/recoverAccount?code='+payload.code,{password:payload.password});
@@ -138,7 +139,7 @@ export  default{
             console.log("recoverAccount catch error response data: ",e.message);
             return 0;
         } finally {
-            context.commit('setLoading',{loading:false},{root:true});
+            context.commit('setLoading',{},{root:true});
         }
     },
 }

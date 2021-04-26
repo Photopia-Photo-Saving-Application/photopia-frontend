@@ -1,20 +1,20 @@
 export default{
     setLoading:(state,payload)=>{
-        state.loading=payload.loading;
+        state.loading=!state.loading;
     },
     setToken:(state,payload)=>{
         state.token=payload.token;
     },
-    setUploadDialogFlag:(state,payload)=>{
-        state.uploadDialogFlag=payload.uploadDialogFlag;
+    setUploadDialogFlag:(state)=>{
+        state.uploadDialogFlag=!state.uploadDialogFlag;
     },
-    setDeleteDialogFlag:(state,payload)=>{
-        state.deleteDialogFlag=payload.deleteDialogFlag;
+    setDeleteDialogFlag:(state)=>{
+        state.deleteDialogFlag=!state.deleteDialogFlag;
     },
-    setLogoutDialogFlag:(state,payload)=>{
-        state.logoutDialogFlag=payload.logoutDialogFlag;
+    setLogoutDialogFlag:(state)=>{
+        state.logoutDialogFlag=!state.logoutDialogFlag;
     },
-    setDeleteAccountDialogFlag:(state,payload)=>{
-        state.deleteAccountDialogFlag=payload.deleteAccountDialogFlag;
+    setDeleteAccountDialogFlag:(state)=>{
+        state.deleteAccountDialogFlag=!state.deleteAccountDialogFlag;
     },
 }

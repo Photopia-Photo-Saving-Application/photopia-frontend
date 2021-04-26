@@ -18,7 +18,7 @@
                         class="grey lighten-2 rounded-lg"
                     >
 
-                        <v-btn @click="setDeleteDialogFlag({deleteDialogFlag:true})"
+                        <v-btn @click="setDeleteDialogFlag"
                                icon dark absolute top right large>
                             <v-icon>mdi-delete-outline</v-icon>
                         </v-btn>
@@ -38,7 +38,7 @@
                 </v-col>
             </v-row>
             <v-fab-transition>
-                <v-btn color="primary" dark fixed bottom right fab @click="setUploadDialogFlag({uploadDialogFlag:true})">
+                <v-btn color="primary" dark fixed bottom right fab @click="setUploadDialogFlag">
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </v-fab-transition>
@@ -52,7 +52,7 @@
 import Navbar from "@/components/Navbar/Navbar";
 import UserForm from "@/components/UserForm/UserForm";
 import MyText from "@/components/MyText/MyText";
-import {mapGetters,mapMutations} from 'vuex'
+import {mapMutations} from 'vuex'
 import UploadDialog from "@/components/MyDialog/UploadDialog";
 import DeleteDialog from "@/components/MyDialog/DeleteDialog";
 

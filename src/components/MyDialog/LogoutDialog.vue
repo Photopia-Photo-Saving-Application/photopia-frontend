@@ -1,11 +1,11 @@
 <template>
     <v-dialog
         persistent
-        v-model="getDeleteAccountDialogFlag"
+        v-model="getLogoutDialogFlag"
         max-width="290">
         <v-card>
             <v-card-title class="headline">
-                <MyText>Are you sure? </MyText>
+                <MyText>Are you sure?</MyText>
             </v-card-title>
             <v-card-actions>
                 <slot name="file"/>
@@ -13,7 +13,7 @@
             <v-card-actions>
                 <v-btn
                     color="light-green accent-3"
-                    @click="setDeleteAccountDialogFlag"
+                    @click="setLogoutDialogFlag"
                 >
                     No
                 </v-btn>
@@ -30,18 +30,21 @@
 </template>
 
 <script>
-import {mapActions, mapGetters, mapMutations} from 'vuex'
+import {mapActions,mapGetters,mapMutations} from 'vuex'
 import MyText from "@/components/MyText/MyText";
 export default {
-    name: "DeleteAccountDialog",
+    name: "LogoutDialog",
     components: {MyText},
     computed:{
-      ...mapGetters(['getDeleteAccountDialogFlag'])  ,
+      ...mapGetters(['getLogoutDialogFlag'])  ,
     },
     methods:{
-        ...mapMutations(['setDeleteAccountDialogFlag']),
-        ...mapActions('auth',['deleteAccount']),
-
+        ...mapMutations(['setLogoutDialogFlag']),
+        ...mapActions('auth',['signOutAllDevices']),
+        async signOutAllClicked(){
+            await this.setLogoutDialogFlag();
+            await this.signOutAllDevices();
+        }
     }
 }
 </script>

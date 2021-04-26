@@ -94,6 +94,7 @@ const router = new VueRouter({
 })
 //code stable version
 router.beforeEach((to, from, next) => {
+  console.log("from.name: "+from.name);
   console.log("to.name: "+to.name);
   console.log("localSorage.getItem(token): "+localStorage.getItem('token'));
   console.log("to.meta.requiresAuth: "+to.meta.requiresAuth);

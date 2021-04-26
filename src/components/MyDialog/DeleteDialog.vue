@@ -13,14 +13,14 @@
             <v-card-actions>
                 <v-btn
                     color="yellow"
-                    @click="setDeleteDialogFlag({deleteDialogFlag:false})"
+                    @click="setDeleteDialogFlag"
                 >
                     Cancel
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
                     color="red darken-1"
-                    @click="setDeleteDialogFlag({deleteDialogFlag:false})"
+                    @click="setDeleteDialogFlag"
                 >
                     Delete
                 </v-btn>

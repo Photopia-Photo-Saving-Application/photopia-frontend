@@ -13,14 +13,14 @@
             <v-card-actions>
                 <v-btn
                     color="yellow"
-                    @click="setUploadDialogFlag({uploadDialogFlag:false})"
+                    @click="setUploadDialogFlag"
                 >
                     Cancel
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
                     color="light-green accent-3"
-                    @click="setUploadDialogFlag({uploadDialogFlag:false})"
+                    @click="setUploadDialogFlag"
                 >
                     Upload
                 </v-btn>

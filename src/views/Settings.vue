@@ -32,12 +32,14 @@
                 ></v-text-field>
             </template>
             <template #buttonField>
-                <Button color="primary" text="CONFIRM" width="100%" :click="submit" :disabled="$v.$anyError"></Button>
+                <Button color="primary" text="CONFIRM" width="100%" :click="submit" :disabled="$v.$anyError || getLoading"></Button>
             </template>
             <template #redirectionField>
-                <UserRouterLink to1="/signIn" to2="/signIn" text1="Logout from all devices" text2="Delete account" :click1="signOutAllDevices" :click2="deleteAccount"></UserRouterLink>
+                <UserRouterLink to1="" to2="" text1="Logout from all devices" text2="Delete account" :click1="setLogoutDialogFlag" :click2="setDeleteAccountDialogFlag"></UserRouterLink>
             </template>
         </UserForm>
+        <LogoutDialog />
+        <DeleteAccountDialog/>
     </div>
 </template>
 
@@ -50,12 +52,14 @@ import {validationMixin} from "vuelidate";
 import {helpers, maxLength, minLength, required, sameAs} from "vuelidate/lib/validators";
 import Button from "@/components/Button/Button";
 import UserRouterLink1 from "@/components/UserRouterLink/UserRouterLink1";
-import {mapActions} from 'vuex'
+import {mapActions,mapGetters,mapMutations} from 'vuex'
+import LogoutDialog from "@/components/MyDialog/LogoutDialog";
+import DeleteAccountDialog from "@/components/MyDialog/DeleteAccountDialog";
 const passwordValidator = helpers.regex('alphaNumAndDot',/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,30}$/);
 
 export default {
     name: "Settings",
-    components: {UserRouterLink1, Button, MyText, UserForm, UserRouterLink, Navbar},
+    components: {DeleteAccountDialog, LogoutDialog, UserRouterLink1, Button, MyText, UserForm, UserRouterLink, Navbar},
     mixins: [validationMixin],
 
     validations: {
@@ -83,6 +87,7 @@ export default {
     }),
 
     computed: {
+        ...mapGetters(['getLogoutDialogFlag','getLoading']),
         currentPasswordErrors() {
             const errors = []
             if (!this.$v.currentPassword.$dirty) return errors
@@ -110,7 +115,8 @@ export default {
     },
 
     methods: {
-        ...mapActions('auth',['signOutAllDevices','deleteAccount',"passwordChange"]),
+        ...mapActions('auth',["passwordChange"]),
+        ...mapMutations(['setLogoutDialogFlag','setDeleteAccountDialogFlag']),
         async submit() {
             await this.$v.$touch();
             await this.passwordChange({oldpassword:this.currentPassword,newpassword:this.newPassword});
