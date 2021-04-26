@@ -41,7 +41,10 @@ export default {
     methods:{
         ...mapMutations(['setDeleteAccountDialogFlag']),
         ...mapActions('auth',['deleteAccount']),
-
+        async signOutAllClicked(){
+            await this.setDeleteAccountDialogFlag();
+            await this.deleteAccount();
+        }
     }
 }
 </script>
