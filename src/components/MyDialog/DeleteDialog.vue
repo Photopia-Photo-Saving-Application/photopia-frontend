@@ -3,23 +3,22 @@
         persistent
         v-model="getDeleteDialogFlag"
         max-width="290">
-        <v-card>
+        <v-card class="pa-5">
             <v-card-title class="headline">
                 <MyText>Delete photo ? </MyText>
             </v-card-title>
             <v-card-actions>
-                <slot name="file"/>
-            </v-card-actions>
-            <v-card-actions>
                 <v-btn
-                    color="yellow"
+                    color="warning"
+                    class="black--text"
                     @click="setDeleteDialogFlag"
                 >
                     Cancel
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
-                    color="red darken-1"
+                    color="error"
+                    class="black--text"
                     @click="setDeleteDialogFlag"
                 >
                     Delete

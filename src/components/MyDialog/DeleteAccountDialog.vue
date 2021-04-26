@@ -3,23 +3,22 @@
         persistent
         v-model="getDeleteAccountDialogFlag"
         max-width="290">
-        <v-card>
+        <v-card class="pa-5">
             <v-card-title class="headline">
                 <MyText>Are you sure? </MyText>
             </v-card-title>
             <v-card-actions>
-                <slot name="file"/>
-            </v-card-actions>
-            <v-card-actions>
                 <v-btn
-                    color="light-green accent-3"
+                    color="success"
+                    class="black--text"
                     @click="setDeleteAccountDialogFlag"
                 >
                     No
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
-                    color="red darken-1"
+                    color="error"
+                    class="black--text"
                     @click="signOutAllClicked"
                 >
                     Yes

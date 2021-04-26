@@ -3,23 +3,31 @@
         persistent
         v-model="getUploadDialogFlag"
         max-width="290">
-        <v-card>
+        <v-card class="pa-5">
             <v-card-title class="headline">
                 <MyText>Upload a photo</MyText>
             </v-card-title>
             <v-card-actions>
-                <slot name="file"/>
+                <v-file-input
+                    label=".jpg .jpeg .png"
+                    outlined
+                    dense
+                    prepend-icon="mdi-camera"
+                ></v-file-input>
             </v-card-actions>
             <v-card-actions>
                 <v-btn
-                    color="yellow"
+                    color="warning "
+                    class="black--text"
                     @click="setUploadDialogFlag"
                 >
                     Cancel
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
-                    color="light-green accent-3"
+                    color="success"
+                    class="black--text"
+                    dark
                     @click="setUploadDialogFlag"
                 >
                     Upload

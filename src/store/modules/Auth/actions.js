@@ -36,7 +36,7 @@ export  default{
     },
 
     async signOut(context){
-        context.commit('setSignInAutoFlag');
+        context.commit('setSignOutFlag');
         context.commit('setLoading',{},{root:true});
         try {
             await photopiaAPI.post('/auth/signOut');
@@ -47,11 +47,11 @@ export  default{
             console.log("signOut catch error response data: ",e.message);
         } finally {
             context.commit('setLoading',{},{root:true});
+            context.commit('setSignOutFlag');
         }
     },
 
     async signOutAllDevices(context){
-        console.log("inside signOutAllDevices")
         context.commit('setLoading',{},{root:true});
         try {
             await photopiaAPI.post('/auth/signOutAllDevices');
@@ -85,7 +85,7 @@ export  default{
             await photopiaAPI.post('/auth/signUp', payload);
             await router.push('/signUp/notify');
         } catch (e) {
-            console.log("signUp catch error response data: ",e.message);
+            console.log("signUp catch error response data: ",e);
         } finally {
             context.commit('setLoading',{},{root:true});
         }
