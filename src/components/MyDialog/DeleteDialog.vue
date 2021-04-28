@@ -51,7 +51,7 @@ export default {
             console.log("deleteDialog image: "+deleteImage);
             await this.setDeleteDialogFlag();
             await this.deleteImage({image:deleteImage});
-            await this.fetchUserImage({image:deleteImage});
+            await this.fetchUserImage();
         }
     }
 }

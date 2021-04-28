@@ -19,9 +19,19 @@ export  default{
         try {
             response = await photopiaAPI.delete('/api/images/'+payload.image);
             // console.log("fetUserImage response: "+response.data.payload.imageList[0]);
-            context.commit('setImageList',{imageList:response.data.payload.imageList});
         } catch (e) {
-            console.log("fetchUserImage catch error response data: ",e.message);
+            console.log("deleteImage catch error response data: ",e.message);
+        } finally {
+            context.commit('setLoading');
+        }
+    },
+    async uploadImage(context,payload){
+        context.commit('setLoading');
+        try {
+            response = await photopiaAPI.post('/api/images',{params:payload});
+            // console.log("fetUserImage response: "+response.data.payload.imageList[0]);
+        } catch (e) {
+            console.log("uploadImage catch error response data: ",e.message);
         } finally {
             context.commit('setLoading');
         }

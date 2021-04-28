@@ -92,9 +92,6 @@ export default {
     methods: {
         ...mapActions(['fetchUserImage']),
         ...mapMutations(['setUploadDialogFlag','setDeleteDialogFlag']),
-        // uploadClicked(){
-        //     this.setUploadDialogFlag({uploadDialogFlag:true});
-        // },
         async deleteClicked(imageURL){
             console.log("home delete imageURL: "+imageURL);
             this.deleteImage=imageURL;
