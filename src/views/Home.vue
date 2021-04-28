@@ -1,17 +1,14 @@
 <template>
     <div>
         <Navbar text="HOME"/>
-        <UserForm v-if="getLoading || flag" :show=false>
+        <UserForm v-if="getLoading" :show=false>
             <template #messageField>
-                <MyText v-if="getLoading">
-                    Fetching images... Please wait !!
-                </MyText>
-                <MyText v-if="flag">
+                <MyText>
                     Fetching images... Please wait !!
                 </MyText>
             </template>
         </UserForm>
-        <v-container fluid style="margin-top: 2%; margin-bottom: 2%;max-height: 100%;max-width: 1000px" v-else>
+        <v-container fluid style="margin-top: 2%; margin-bottom: 2%;max-height: 100%;max-width: 1000px" v-else-if="getImageList!==undefined && getImageList.length!==0">
             <v-row>
                 <v-col
                     v-for="n in getImageList"
@@ -48,14 +45,21 @@
                     </v-img>
                 </v-col>
             </v-row>
-            <v-fab-transition>
-                <v-btn color="primary" dark fixed bottom right fab @click="setUploadDialogFlag">
-                    <v-icon>mdi-plus</v-icon>
-                </v-btn>
-            </v-fab-transition>
-           <UploadDialog />
             <DeleteDialog :image="deleteImage"/>
         </v-container>
+        <UserForm v-else :show=false>
+            <template #messageField>
+                <MyText>
+                    Add image .... !!
+                </MyText>
+            </template>
+        </UserForm>
+        <v-fab-transition>
+            <v-btn color="primary" dark fixed bottom right fab @click="setUploadDialogFlag">
+                <v-icon>mdi-plus</v-icon>
+            </v-btn>
+        </v-fab-transition>
+        <UploadDialog />
     </div>
 </template>
 
@@ -100,9 +104,6 @@ export default {
     async mounted(){
         if(this.getImageList.length===0){
             await this.fetchUserImage();
-        }
-        if(this.getImageList.length===0){
-            this.flag=1;
         }
     }
 }
