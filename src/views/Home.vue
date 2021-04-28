@@ -1,10 +1,20 @@
 <template>
     <div>
         <Navbar text="HOME"/>
-        <v-container fluid style="margin-top: 2%; margin-bottom: 2%;max-height: 100%;max-width: 1000px">
+        <UserForm v-if="getLoading || flag" :show=false>
+            <template #messageField>
+                <MyText v-if="getLoading">
+                    Fetching images... Please wait !!
+                </MyText>
+                <MyText v-if="flag">
+                    Fetching images... Please wait !!
+                </MyText>
+            </template>
+        </UserForm>
+        <v-container fluid style="margin-top: 2%; margin-bottom: 2%;max-height: 100%;max-width: 1000px" v-else>
             <v-row>
                 <v-col
-                    v-for="n in 10"
+                    v-for="n in getImageList"
                     :key="n"
                     class="d-flex child-flex pa-4"
                     cols="12"
@@ -12,13 +22,14 @@
                     lg="6"
                 >
                     <v-img
-                        :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-                        :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+                        :src="n"
+                        :lazy-src="n"
                         aspect-ratio="1.3"
                         class="grey lighten-2 rounded-lg"
+                        cover
                     >
 
-                        <v-btn @click="setDeleteDialogFlag"
+                        <v-btn @click="deleteClicked(n)"
                                icon dark absolute top right large>
                             <v-icon>mdi-delete-outline</v-icon>
                         </v-btn>
@@ -43,7 +54,7 @@
                 </v-btn>
             </v-fab-transition>
            <UploadDialog />
-            <DeleteDialog/>
+            <DeleteDialog :image="deleteImage"/>
         </v-container>
     </div>
 </template>
@@ -52,7 +63,7 @@
 import Navbar from "@/components/Navbar/Navbar";
 import UserForm from "@/components/UserForm/UserForm";
 import MyText from "@/components/MyText/MyText";
-import {mapMutations} from 'vuex'
+import {mapActions, mapGetters, mapMutations} from 'vuex'
 import UploadDialog from "@/components/MyDialog/UploadDialog";
 import DeleteDialog from "@/components/MyDialog/DeleteDialog";
 
@@ -66,21 +77,33 @@ export default {
         Navbar
     },
     computed:{
-      // ...mapGetters(['getUploadDialogFlag','getDeleteDialogFlag'])  ,
+      ...mapGetters(['getImageList','getLoading']) ,
     },
     data: () => {
         return {
-
+            deleteImage:"",
+            flag:0
         }
     },
     methods: {
+        ...mapActions(['fetchUserImage']),
         ...mapMutations(['setUploadDialogFlag','setDeleteDialogFlag']),
         // uploadClicked(){
         //     this.setUploadDialogFlag({uploadDialogFlag:true});
         // },
-        // deleteClicked(){
-        //     this.setDeleteDialogFlag({deleteDialogFlag:true});
-        // }
+        async deleteClicked(imageURL){
+            console.log("home delete imageURL: "+imageURL);
+            this.deleteImage=imageURL;
+            await this.setDeleteDialogFlag();
+        }
+    },
+    async mounted(){
+        if(this.getImageList.length===0){
+            await this.fetchUserImage();
+        }
+        if(this.getImageList.length===0){
+            this.flag=1;
+        }
     }
 }
 </script>

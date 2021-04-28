@@ -27,7 +27,6 @@
                 <v-btn
                     color="success"
                     class="black--text"
-                    dark
                     @click="setUploadDialogFlag"
                 >
                     Upload

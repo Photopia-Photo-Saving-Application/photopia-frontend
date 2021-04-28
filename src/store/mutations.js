@@ -17,4 +17,7 @@ export default{
     setDeleteAccountDialogFlag:(state)=>{
         state.deleteAccountDialogFlag=!state.deleteAccountDialogFlag;
     },
+    setImageList:(state,payload)=>{
+        state.imageList=payload.imageList;
+    }
 }

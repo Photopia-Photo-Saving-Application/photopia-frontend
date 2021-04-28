@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import authModule from './modules/Auth/index'
 import rootGetters from './getters'
 import rootMutations from './mutations'
+import rootActions from './actions'
 
 Vue.use(Vuex)
 
@@ -14,12 +15,12 @@ export const store=new Vuex.Store({
     uploadDialogFlag:false,
     deleteDialogFlag:false,
     logoutDialogFlag:false,
-    deleteAccountDialogFlag:false
+    deleteAccountDialogFlag:false,
+    imageList:[],
   },
   getters:rootGetters,
   mutations: rootMutations,
-  actions: {
-  },
+  actions:rootActions,
   modules: {
     auth: authModule
   }

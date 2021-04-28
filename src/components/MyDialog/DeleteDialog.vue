@@ -19,7 +19,7 @@
                 <v-btn
                     color="error"
                     class="black--text"
-                    @click="setDeleteDialogFlag"
+                    @click="deleteClicked"
                 >
                     Delete
                 </v-btn>
@@ -29,16 +29,30 @@
 </template>
 
 <script>
-import {mapGetters,mapMutations} from 'vuex'
+import {mapActions, mapGetters,mapMutations} from 'vuex'
 import MyText from "@/components/MyText/MyText";
 export default {
     name: "DeleteDialog",
     components: {MyText},
+    props:{
+        "image":{
+            required:true
+        }
+    },
     computed:{
-      ...mapGetters(['getDeleteDialogFlag'])  ,
+      ...mapGetters(['getDeleteDialogFlag','getImageList'])  ,
     },
     methods:{
         ...mapMutations(['setDeleteDialogFlag']),
+        ...mapActions(['deleteImage','fetchUserImage']),
+        async deleteClicked(){
+            let deleteImage=this.image.split('/');
+            deleteImage=deleteImage[deleteImage.length-1];
+            console.log("deleteDialog image: "+deleteImage);
+            await this.setDeleteDialogFlag();
+            await this.deleteImage({image:deleteImage});
+            await this.fetchUserImage({image:deleteImage});
+        }
     }
 }
 </script>

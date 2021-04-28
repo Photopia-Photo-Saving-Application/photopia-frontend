@@ -4,7 +4,7 @@
             <v-text-field
                 v-model.trim="name"
                 :error-messages="nameErrors"
-                label="Name"
+                label="Username"
                 required
                 @blur="$v.name.$touch()"
             ></v-text-field>

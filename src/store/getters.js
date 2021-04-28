@@ -16,5 +16,8 @@ export default {
     },
     getLogoutDialogFlag:state=>{
         return state.logoutDialogFlag
+    },
+    getImageList:state=>{
+        return state.imageList
     }
 }
