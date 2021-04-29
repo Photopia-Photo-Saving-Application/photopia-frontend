@@ -73,8 +73,8 @@ export default {
         ...mapActions(['uploadImage','fetchUserImage']),
         async uploadClicked(){
             await this.setUploadDialogFlag();
-            console.log("image: "+typeof this.image);
-            console.log(this.image);
+            // console.log("image: "+typeof this.image);
+            // console.log(this.image);
             let formData = new FormData();
             formData.append('file',this.image);
             await this.uploadImage(formData);
