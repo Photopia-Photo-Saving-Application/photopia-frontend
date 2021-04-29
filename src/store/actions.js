@@ -28,7 +28,7 @@ export  default{
     async uploadImage(context,payload){
         context.commit('setLoading');
         try {
-            response = await photopiaAPI.post('/api/images',{params:payload});
+            response = await photopiaAPI.post('/api/images',payload);
             // console.log("fetUserImage response: "+response.data.payload.imageList[0]);
         } catch (e) {
             console.log("uploadImage catch error response data: ",e.message);

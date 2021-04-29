@@ -4,7 +4,7 @@
         <UserForm v-if="getLoading" :show=false>
             <template #messageField>
                 <MyText>
-                    Fetching images... Please wait !!
+                    Loading... Please wait !!
                 </MyText>
             </template>
         </UserForm>

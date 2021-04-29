@@ -2,8 +2,8 @@ import axios from "axios";
 import {store} from '../store';
 
 const photopiaAPI = axios.create({
-    baseURL: 'http://localhost:8888',
-    // baseURL: 'https://mt-demospring.herokuapp.com'
+    // baseURL: 'http://localhost:8888',
+    baseURL: 'https://mt-demospring.herokuapp.com'
 });
 
 
